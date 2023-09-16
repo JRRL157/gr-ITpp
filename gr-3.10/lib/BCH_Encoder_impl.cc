@@ -23,29 +23,59 @@ BCH_Encoder::sptr BCH_Encoder::make(int n, int t) {
  * The private constructor
  */
 BCH_Encoder_impl::BCH_Encoder_impl(int n, int t)
-    : gr::sync_block(
+    : gr::block(
           "BCH_Encoder",
           gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,
                                  sizeof(input_type)),
           gr::io_signature::make(1 /* min outputs */, 1 /*max outputs */,
-                                 sizeof(output_type))) {}
+                                 sizeof(output_type))),
+      bloco(n, t)
+{
+  d_N = n;
+  d_T = t;
+  d_K = bloco.get_k();
+  uncoded.set_length(d_K);
+  set_output_multiple(d_N);
+}
 
 /*
  * Our virtual destructor.
  */
 BCH_Encoder_impl::~BCH_Encoder_impl() {}
 
-int BCH_Encoder_impl::work(int noutput_items,
-                           gr_vector_const_void_star &input_items,
-                           gr_vector_void_star &output_items) {
+void BCH_Encoder_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
+{
+  ninput_items_required[0] = (int)(noutput_items * ((float)d_K)/((float)d_N));
+}
+
+int BCH_Encoder_impl::general_work(int noutput_items,
+           gr_vector_int &ninput_items,
+           gr_vector_const_void_star &input_items,
+           gr_vector_void_star &output_items) {
   auto in = static_cast<const input_type *>(input_items[0]);
   auto out = static_cast<output_type *>(output_items[0]);
 
-#pragma message(                                                               \
-        "Implement the signal processing in your block and remove this warning")
-  // Do <+signal processing+>
+  uncoded.zeros();
 
-  // Tell runtime system how many output items we produced.
+  for(int i = 0; i < noutput_items/d_N; i++){
+    
+    for(int j = 0; j < d_N; j++){
+      out[d_N*i+j] = 0;
+    }
+
+    for(int j = 0; j < d_K; j++){
+      uncoded(j) = in[d_K*i+j];
+    }
+    
+    encoded = bloco.encode(uncoded);
+
+    for(int j = 0; j < d_N; j++){
+      out[d_N*i+j] = (int)encoded.get(j);
+    }
+
+  }
+
+  consume(0, (int)(noutput_items * ((float)d_K)/((float)d_N)));
   return noutput_items;
 }
 

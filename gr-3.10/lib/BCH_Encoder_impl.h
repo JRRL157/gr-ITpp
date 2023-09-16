@@ -10,19 +10,28 @@
 
 #include <gnuradio/ITpp/BCH_Encoder.h>
 
+#include <itpp/itbase.h>
+#include <itpp/comm/bch.h>
+
 namespace gr {
 namespace ITpp {
 
 class BCH_Encoder_impl : public BCH_Encoder {
 private:
-  // Nothing to declare in this block.
+  int d_N, d_K, d_T;
+  itpp::BCH bloco;
+  itpp::bvec uncoded, encoded;
 
 public:
   BCH_Encoder_impl(int n, int t);
   ~BCH_Encoder_impl();
 
   // Where all the action really happens
-  int work(int noutput_items, gr_vector_const_void_star &input_items,
+  void forecast (int noutput_items, gr_vector_int &ninput_items_required);
+
+  int general_work(int noutput_items,
+           gr_vector_int &ninput_items,
+           gr_vector_const_void_star &input_items,
            gr_vector_void_star &output_items);
 };
 
