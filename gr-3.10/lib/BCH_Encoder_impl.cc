@@ -11,10 +11,8 @@
 namespace gr {
 namespace ITpp {
 
-#pragma message("set the following appropriately and remove this warning")
-using input_type = float;
-#pragma message("set the following appropriately and remove this warning")
-using output_type = float;
+using input_type = unsigned char;
+using output_type = unsigned char;
 BCH_Encoder::sptr BCH_Encoder::make(int n, int t) {
   return gnuradio::make_block_sptr<BCH_Encoder_impl>(n, t);
 }

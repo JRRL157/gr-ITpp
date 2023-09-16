@@ -14,9 +14,7 @@
 namespace gr {
 namespace ITpp {
 
-#pragma message("set the following appropriately and remove this warning")
 using input_type = unsigned char;
-#pragma message("set the following appropriately and remove this warning")
 using output_type = unsigned char;
 BSC_Byte::sptr BSC_Byte::make(int bits, float probability) {
   return gnuradio::make_block_sptr<BSC_Byte_impl>(bits, probability);
