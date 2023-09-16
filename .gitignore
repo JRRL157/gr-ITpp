@@ -18,7 +18,6 @@ __pycache__/
 #/examples/BPSK Ladams
 
 *.data
-*.txt
 *.wav
 
 !examples/Hier Blocks/note.txt
