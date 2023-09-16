@@ -14,7 +14,7 @@ templates:
 #     * default
 parameters:
 - id: m
-  label: Parâmetro m:
+  label: Parâmetro m
   dtype: int
   # default: You need to fill in your grc/ITpp_Hamming_Decoder.block.yaml
 

@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(BCH_Encoder.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(176c0d258afa6bc4f365ef9e51b7517c)                     */
+/* BINDTOOL_HEADER_FILE_HASH(964967c2582311d5177a952664730534)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -33,7 +33,7 @@ void bind_BCH_Encoder(py::module& m)
     using BCH_Encoder    = gr::ITpp::BCH_Encoder;
 
 
-    py::class_<BCH_Encoder, gr::sync_block, gr::block, gr::basic_block,
+    py::class_<BCH_Encoder, gr::block, gr::basic_block,
         std::shared_ptr<BCH_Encoder>>(m, "BCH_Encoder", D(BCH_Encoder))
 
         .def(py::init(&BCH_Encoder::make),

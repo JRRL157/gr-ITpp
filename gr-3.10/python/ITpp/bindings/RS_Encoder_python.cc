@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(RS_Encoder.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(beae9c4ca22c00158ef307b6fd8b0ccd)                     */
+/* BINDTOOL_HEADER_FILE_HASH(2840398481da7088f58e5a78662da5e5)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -33,7 +33,7 @@ void bind_RS_Encoder(py::module& m)
     using RS_Encoder    = gr::ITpp::RS_Encoder;
 
 
-    py::class_<RS_Encoder, gr::sync_block, gr::block, gr::basic_block,
+    py::class_<RS_Encoder, gr::block, gr::basic_block,
         std::shared_ptr<RS_Encoder>>(m, "RS_Encoder", D(RS_Encoder))
 
         .def(py::init(&RS_Encoder::make),

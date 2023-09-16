@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(Hamming_Encoder.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(ef35bb8dcad6e510d5da06cc78522a96)                     */
+/* BINDTOOL_HEADER_FILE_HASH(db786f9d3cae6aa82c987353d15edbfb)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -33,7 +33,7 @@ void bind_Hamming_Encoder(py::module& m)
     using Hamming_Encoder    = gr::ITpp::Hamming_Encoder;
 
 
-    py::class_<Hamming_Encoder, gr::sync_block, gr::block, gr::basic_block,
+    py::class_<Hamming_Encoder, gr::block, gr::basic_block,
         std::shared_ptr<Hamming_Encoder>>(m, "Hamming_Encoder", D(Hamming_Encoder))
 
         .def(py::init(&Hamming_Encoder::make),

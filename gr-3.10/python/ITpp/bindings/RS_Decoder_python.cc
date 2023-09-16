@@ -14,7 +14,7 @@
 /* BINDTOOL_GEN_AUTOMATIC(0)                                                       */
 /* BINDTOOL_USE_PYGCCXML(0)                                                        */
 /* BINDTOOL_HEADER_FILE(RS_Decoder.h)                                        */
-/* BINDTOOL_HEADER_FILE_HASH(cb79a4b720054015b2e7fc6a6d8af5ff)                     */
+/* BINDTOOL_HEADER_FILE_HASH(e06af6b7ce97d36842001376777af970)                     */
 /***********************************************************************************/
 
 #include <pybind11/complex.h>
@@ -33,7 +33,7 @@ void bind_RS_Decoder(py::module& m)
     using RS_Decoder    = gr::ITpp::RS_Decoder;
 
 
-    py::class_<RS_Decoder, gr::sync_block, gr::block, gr::basic_block,
+    py::class_<RS_Decoder, gr::block, gr::basic_block,
         std::shared_ptr<RS_Decoder>>(m, "RS_Decoder", D(RS_Decoder))
 
         .def(py::init(&RS_Decoder::make),

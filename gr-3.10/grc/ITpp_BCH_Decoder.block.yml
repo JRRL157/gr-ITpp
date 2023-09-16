@@ -14,7 +14,7 @@ templates:
 #     * default
 parameters:
 - id: n
-  label: Parâmetro N:
+  label: Parâmetro N
   dtype: int
   # default:
 
