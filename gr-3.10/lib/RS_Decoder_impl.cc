@@ -23,11 +23,9 @@ RS_Decoder::sptr RS_Decoder::make(int m, int t) {
 RS_Decoder_impl::RS_Decoder_impl(int m, int t)
     : gr::block(
           "RS_Decoder",
-          gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,
-                                 sizeof(input_type)),
-          gr::io_signature::make(1 /* min outputs */, 1 /*max outputs */,
-                                 sizeof(output_type))),
-                                 bloco(m, t)
+          gr::io_signature::make(1, 1, sizeof(input_type)),
+          gr::io_signature::make(1, 1,sizeof(output_type))),
+      bloco(m, t)
 {
   d_N = m * (itpp::round_i(pow(2.0, m) - 1));
   d_K = m * (itpp::round_i(pow(2.0, m)) - 1 - 2 * t);

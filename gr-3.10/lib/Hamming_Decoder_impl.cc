@@ -26,10 +26,8 @@ Hamming_Decoder::sptr Hamming_Decoder::make(int m) {
 Hamming_Decoder_impl::Hamming_Decoder_impl(int m)
     : gr::block(
           "Hamming_Decoder",
-          gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,
-                                 sizeof(input_type)),
-          gr::io_signature::make(1 /* min outputs */, 1 /*max outputs */,
-                                 sizeof(output_type)))
+          gr::io_signature::make(1, 1, sizeof(input_type)),
+          gr::io_signature::make(1, 1, sizeof(output_type)))
 {
   d_m = m;
 
@@ -53,7 +51,8 @@ void Hamming_Decoder_impl::forecast (int noutput_items, gr_vector_int &ninput_it
 int Hamming_Decoder_impl::general_work(int noutput_items,
            gr_vector_int &ninput_items,
            gr_vector_const_void_star &input_items,
-           gr_vector_void_star &output_items) {
+           gr_vector_void_star &output_items)
+{
   auto in = static_cast<const input_type *>(input_items[0]);
   auto out = static_cast<output_type *>(output_items[0]);
 

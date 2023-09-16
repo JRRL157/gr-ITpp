@@ -26,10 +26,8 @@ BSC_Byte::sptr BSC_Byte::make(int bits, float probability) {
 BSC_Byte_impl::BSC_Byte_impl(int bits, float probability)
     : gr::sync_block(
           "BSC_Byte",
-          gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,
-                                 sizeof(input_type)),
-          gr::io_signature::make(1 /* min outputs */, 1 /*max outputs */,
-                                 sizeof(output_type)))
+          gr::io_signature::make(1, 1, sizeof(input_type)),
+          gr::io_signature::make(1, 1, sizeof(output_type)))
 {
   d_probability = probability;
   d_bits = bits;
@@ -44,7 +42,8 @@ BSC_Byte_impl::~BSC_Byte_impl() {}
 
 int BSC_Byte_impl::work(int noutput_items,
                         gr_vector_const_void_star &input_items,
-                        gr_vector_void_star &output_items) {
+                        gr_vector_void_star &output_items)
+{
   auto in = static_cast<const input_type *>(input_items[0]);
   auto out = static_cast<output_type *>(output_items[0]);
 
