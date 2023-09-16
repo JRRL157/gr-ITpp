@@ -9,7 +9,7 @@
 #define INCLUDED_ITPP_BCH_DECODER_H
 
 #include <gnuradio/ITpp/api.h>
-#include <gnuradio/sync_block.h>
+#include <gnuradio/block.h>
 
 namespace gr {
 namespace ITpp {
@@ -19,7 +19,7 @@ namespace ITpp {
  * \ingroup ITpp
  *
  */
-class ITPP_API BCH_Decoder : virtual public gr::sync_block {
+class ITPP_API BCH_Decoder : virtual public gr::block {
 public:
   typedef std::shared_ptr<BCH_Decoder> sptr;
 
