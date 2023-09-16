@@ -29,6 +29,8 @@ list(INSERT CMAKE_MODULE_PATH 0 ${PROJECT_SOURCE_DIR}/cmake/Modules)
 # Find gnuradio to get access to the cmake modules
 find_package(Gnuradio "3.10" REQUIRED)
 
+find_package(ITPP REQUIRED)
+
 # Set the version information here
 # cmake-format: off
 set(VERSION_MAJOR 1)

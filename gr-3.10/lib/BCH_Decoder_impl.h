@@ -10,12 +10,17 @@
 
 #include <gnuradio/ITpp/BCH_Decoder.h>
 
+#include <itpp/itbase.h>
+#include <itpp/comm/bch.h>
+
 namespace gr {
 namespace ITpp {
 
 class BCH_Decoder_impl : public BCH_Decoder {
 private:
-  // Nothing to declare in this block.
+    int d_N, d_K, d_T;
+    itpp::BCH bloco;
+    itpp::bvec decoded, encoded;
 
 public:
   BCH_Decoder_impl(int n, int t);

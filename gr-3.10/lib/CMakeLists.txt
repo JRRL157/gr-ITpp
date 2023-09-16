@@ -29,6 +29,7 @@ endif(NOT ITpp_sources)
 
 add_library(gnuradio-ITpp SHARED ${ITpp_sources})
 target_link_libraries(gnuradio-ITpp gnuradio::gnuradio-runtime)
+target_link_libraries(gnuradio-ITpp ${ITPP_LIBRARY})
 target_include_directories(gnuradio-ITpp
     PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/../include>
     PUBLIC $<INSTALL_INTERFACE:include>

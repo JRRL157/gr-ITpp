@@ -25,10 +25,16 @@ BCH_Decoder::sptr BCH_Decoder::make(int n, int t) {
 BCH_Decoder_impl::BCH_Decoder_impl(int n, int t)
     : gr::sync_block(
           "BCH_Decoder",
-          gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,
-                                 sizeof(input_type)),
-          gr::io_signature::make(1 /* min outputs */, 1 /*max outputs */,
-                                 sizeof(output_type))) {}
+          gr::io_signature::make(1, 1, sizeof(input_type)),
+          gr::io_signature::make(1, 1, sizeof(output_type))),
+          bloco(n, t)
+{
+    d_N = n;
+    d_T = t;
+    d_K = bloco.get_k();
+    encoded.set_length(d_N);
+    set_output_multiple(d_K);
+}
 
 /*
  * Our virtual destructor.
