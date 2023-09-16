@@ -10,20 +10,28 @@
 
 #include <gnuradio/ITpp/RS_Encoder.h>
 
+#include <itpp/itcomm.h>
+
 namespace gr {
 namespace ITpp {
 
 class RS_Encoder_impl : public RS_Encoder {
 private:
-  // Nothing to declare in this block.
+  int d_N, d_K, d_T;
+  itpp::Reed_Solomon bloco;
+  itpp::bvec uncoded, encoded;
 
 public:
   RS_Encoder_impl(int m, int t);
   ~RS_Encoder_impl();
 
   // Where all the action really happens
-  int work(int noutput_items, gr_vector_const_void_star &input_items,
-           gr_vector_void_star &output_items);
+  void forecast (int noutput_items, gr_vector_int &ninput_items_required);
+
+  int general_work(int noutput_items,
+        gr_vector_int &ninput_items,
+        gr_vector_const_void_star &input_items,
+        gr_vector_void_star &output_items);
 };
 
 } // namespace ITpp

@@ -11,10 +11,8 @@
 namespace gr {
 namespace ITpp {
 
-#pragma message("set the following appropriately and remove this warning")
-using input_type = float;
-#pragma message("set the following appropriately and remove this warning")
-using output_type = float;
+using input_type = unsigned char;
+using output_type = unsigned char;
 RS_Encoder::sptr RS_Encoder::make(int m, int t) {
   return gnuradio::make_block_sptr<RS_Encoder_impl>(m, t);
 }
@@ -23,29 +21,56 @@ RS_Encoder::sptr RS_Encoder::make(int m, int t) {
  * The private constructor
  */
 RS_Encoder_impl::RS_Encoder_impl(int m, int t)
-    : gr::sync_block(
+    : gr::block(
           "RS_Encoder",
-          gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,
-                                 sizeof(input_type)),
-          gr::io_signature::make(1 /* min outputs */, 1 /*max outputs */,
-                                 sizeof(output_type))) {}
+          gr::io_signature::make(1, 1, sizeof(input_type)),
+          gr::io_signature::make(1, 1, sizeof(output_type))),
+          bloco(m, t)
+{
+  d_N = m * (itpp::round_i(pow(2.0, m) - 1));
+  d_K = m * (itpp::round_i(pow(2.0, m)) - 1 - 2 * t);
+  // d_Q = round_i(pow(2.0, m));
+  uncoded.set_length(d_K);
+  set_output_multiple(d_N);
+}
 
 /*
  * Our virtual destructor.
  */
 RS_Encoder_impl::~RS_Encoder_impl() {}
 
-int RS_Encoder_impl::work(int noutput_items,
-                          gr_vector_const_void_star &input_items,
-                          gr_vector_void_star &output_items) {
+void RS_Encoder_impl::forecast (int noutput_items, gr_vector_int &ninput_items_required)
+{
+  ninput_items_required[0] = (int)(noutput_items * ((float)d_K)/((float)d_N));
+}
+
+int RS_Encoder_impl::general_work (int noutput_items,
+                       gr_vector_int &ninput_items,
+                       gr_vector_const_void_star &input_items,
+                       gr_vector_void_star &output_items)
+{
   auto in = static_cast<const input_type *>(input_items[0]);
   auto out = static_cast<output_type *>(output_items[0]);
 
-#pragma message(                                                               \
-        "Implement the signal processing in your block and remove this warning")
-  // Do <+signal processing+>
+  uncoded.zeros();
 
-  // Tell runtime system how many output items we produced.
+  for(int i = 0; i < noutput_items/d_N; i++){
+    for(int j = 0; j < d_N; j++){
+        out[d_N*i+j] = 0; 
+    } 
+    for(int j = 0; j < d_K; j++){
+        uncoded(j) = in[d_K*i+j]; 
+    }
+
+    encoded = bloco.encode(uncoded);
+
+    for(int j = 0; j < d_N; j++){
+        out[d_N*i+j] = (int)encoded.get(j);
+    }
+  }
+
+  consume(0, (int)(noutput_items * ((float)d_K)/((float)d_N)));
+
   return noutput_items;
 }
 

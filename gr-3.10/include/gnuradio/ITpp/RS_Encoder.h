@@ -19,7 +19,7 @@ namespace ITpp {
  * \ingroup ITpp
  *
  */
-class ITPP_API RS_Encoder : virtual public gr::sync_block {
+class ITPP_API RS_Encoder : virtual public gr::block {
 public:
   typedef std::shared_ptr<RS_Encoder> sptr;
 
