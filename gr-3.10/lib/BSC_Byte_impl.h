@@ -15,7 +15,8 @@ namespace ITpp {
 
 class BSC_Byte_impl : public BSC_Byte {
 private:
-  // Nothing to declare in this block.
+  int d_bits;
+  float d_probability;
 
 public:
   BSC_Byte_impl(int bits, float probability);
