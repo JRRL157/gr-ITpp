@@ -19,7 +19,7 @@ namespace ITpp {
  * \ingroup ITpp
  *
  */
-class ITPP_API BCH_Decoder : virtual public gr::block {
+class ITPP_API BCH_Decoder : virtual public gr::sync_block {
 public:
   typedef std::shared_ptr<BCH_Decoder> sptr;
 

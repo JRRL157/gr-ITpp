@@ -4,7 +4,7 @@ category: '[ITpp]'
 
 templates:
   imports: from gnuradio import ITpp
-  make: ITpp.BSC_Byte(${bits})
+  make: ITpp.BSC_Byte(${bits}, ${probability})
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:

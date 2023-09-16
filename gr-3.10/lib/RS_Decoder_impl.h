@@ -18,7 +18,7 @@ private:
   // Nothing to declare in this block.
 
 public:
-  RS_Decoder_impl(m, t);
+  RS_Decoder_impl(int m, int t);
   ~RS_Decoder_impl();
 
   // Where all the action really happens

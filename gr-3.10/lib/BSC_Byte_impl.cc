@@ -15,14 +15,14 @@ namespace ITpp {
 using input_type = float;
 #pragma message("set the following appropriately and remove this warning")
 using output_type = float;
-BSC_Byte::sptr BSC_Byte::make(bits) {
-  return gnuradio::make_block_sptr<BSC_Byte_impl>(bits);
+BSC_Byte::sptr BSC_Byte::make(int bits, float probability) {
+  return gnuradio::make_block_sptr<BSC_Byte_impl>(bits, probability);
 }
 
 /*
  * The private constructor
  */
-BSC_Byte_impl::BSC_Byte_impl(bits)
+BSC_Byte_impl::BSC_Byte_impl(int bits, float probability)
     : gr::sync_block(
           "BSC_Byte",
           gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,

@@ -18,7 +18,7 @@ private:
   // Nothing to declare in this block.
 
 public:
-  BSC_Byte_impl(bits);
+  BSC_Byte_impl(int bits, float probability);
   ~BSC_Byte_impl();
 
   // Where all the action really happens

@@ -18,7 +18,7 @@ private:
   // Nothing to declare in this block.
 
 public:
-  Hamming_Encoder_impl(m);
+  Hamming_Encoder_impl(int m);
   ~Hamming_Encoder_impl();
 
   // Where all the action really happens

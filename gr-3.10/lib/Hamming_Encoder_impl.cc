@@ -15,14 +15,14 @@ namespace ITpp {
 using input_type = float;
 #pragma message("set the following appropriately and remove this warning")
 using output_type = float;
-Hamming_Encoder::sptr Hamming_Encoder::make(m) {
+Hamming_Encoder::sptr Hamming_Encoder::make(int m) {
   return gnuradio::make_block_sptr<Hamming_Encoder_impl>(m);
 }
 
 /*
  * The private constructor
  */
-Hamming_Encoder_impl::Hamming_Encoder_impl(m)
+Hamming_Encoder_impl::Hamming_Encoder_impl(int m)
     : gr::sync_block(
           "Hamming_Encoder",
           gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,

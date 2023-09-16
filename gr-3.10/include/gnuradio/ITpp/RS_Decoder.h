@@ -31,7 +31,7 @@ public:
    * class. ITpp::RS_Decoder::make is the public interface for
    * creating new instances.
    */
-  static sptr make(m, t);
+  static sptr make(int m, int t);
 };
 
 } // namespace ITpp

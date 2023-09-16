@@ -31,7 +31,7 @@ public:
    * class. ITpp::BCH_Encoder::make is the public interface for
    * creating new instances.
    */
-  static sptr make(n, t);
+  static sptr make(int n, int t);
 };
 
 } // namespace ITpp

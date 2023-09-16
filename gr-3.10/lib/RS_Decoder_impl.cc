@@ -15,14 +15,14 @@ namespace ITpp {
 using input_type = float;
 #pragma message("set the following appropriately and remove this warning")
 using output_type = float;
-RS_Decoder::sptr RS_Decoder::make(m, t) {
+RS_Decoder::sptr RS_Decoder::make(int m, int t) {
   return gnuradio::make_block_sptr<RS_Decoder_impl>(m, t);
 }
 
 /*
  * The private constructor
  */
-RS_Decoder_impl::RS_Decoder_impl(m, t)
+RS_Decoder_impl::RS_Decoder_impl(int m, int t)
     : gr::sync_block(
           "RS_Decoder",
           gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,

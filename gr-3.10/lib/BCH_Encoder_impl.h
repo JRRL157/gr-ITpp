@@ -18,7 +18,7 @@ private:
   // Nothing to declare in this block.
 
 public:
-  BCH_Encoder_impl(n, t);
+  BCH_Encoder_impl(int n, int t);
   ~BCH_Encoder_impl();
 
   // Where all the action really happens

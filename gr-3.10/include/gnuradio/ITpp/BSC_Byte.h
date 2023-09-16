@@ -31,7 +31,7 @@ public:
    * class. ITpp::BSC_Byte::make is the public interface for
    * creating new instances.
    */
-  static sptr make(bits);
+  static sptr make(int bits, float probability);
 };
 
 } // namespace ITpp

@@ -31,7 +31,7 @@ public:
    * class. ITpp::Hamming_Decoder::make is the public interface for
    * creating new instances.
    */
-  static sptr make(m);
+  static sptr make(int m);
 };
 
 } // namespace ITpp

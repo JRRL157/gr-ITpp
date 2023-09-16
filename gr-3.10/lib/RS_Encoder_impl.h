@@ -18,7 +18,7 @@ private:
   // Nothing to declare in this block.
 
 public:
-  RS_Encoder_impl(m, t);
+  RS_Encoder_impl(int m, int t);
   ~RS_Encoder_impl();
 
   // Where all the action really happens

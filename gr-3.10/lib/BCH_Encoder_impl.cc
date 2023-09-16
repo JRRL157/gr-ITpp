@@ -15,14 +15,14 @@ namespace ITpp {
 using input_type = float;
 #pragma message("set the following appropriately and remove this warning")
 using output_type = float;
-BCH_Encoder::sptr BCH_Encoder::make(n, t) {
+BCH_Encoder::sptr BCH_Encoder::make(int n, int t) {
   return gnuradio::make_block_sptr<BCH_Encoder_impl>(n, t);
 }
 
 /*
  * The private constructor
  */
-BCH_Encoder_impl::BCH_Encoder_impl(n, t)
+BCH_Encoder_impl::BCH_Encoder_impl(int n, int t)
     : gr::sync_block(
           "BCH_Encoder",
           gr::io_signature::make(1 /* min inputs */, 1 /* max inputs */,
