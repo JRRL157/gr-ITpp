@@ -27,8 +27,18 @@ Hamming_Encoder_impl::Hamming_Encoder_impl(int m)
     : gr::block(
           "Hamming_Encoder",
           gr::io_signature::make(1, 1, sizeof(input_type)),
-          gr::io_signature::make(1, 1,sizeof(output_type)))
-{ }
+          gr::io_signature::make(1, 1, sizeof(output_type)))
+{
+  d_m = m;
+
+  itpp::Hamming_Code block(d_m);
+  d_K = block.get_k();
+  d_N = block.get_n();
+
+  std::printf("constructor(): d_K = %d, d_N = %d\n", d_K, d_N);
+
+  set_output_multiple(d_N);
+}
 
 /*
  * Our virtual destructor.
