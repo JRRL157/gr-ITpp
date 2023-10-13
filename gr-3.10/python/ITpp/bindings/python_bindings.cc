@@ -24,6 +24,7 @@ namespace py = pybind11;
     void bind_BCH_Decoder(py::module& m);
     void bind_BCH_Encoder(py::module& m);
     void bind_Hamming_Decoder(py::module& m);
+    void bind_Hamming_Soft_Decoder(py::module& m);
     void bind_Hamming_Encoder(py::module& m);
     void bind_RS_Decoder(py::module& m);
     void bind_RS_Encoder(py::module& m);
@@ -59,6 +60,7 @@ PYBIND11_MODULE(ITpp_python, m)
     bind_BCH_Decoder(m);
     bind_BCH_Encoder(m);
     bind_Hamming_Decoder(m);
+    bind_Hamming_Soft_Decoder(m);
     bind_Hamming_Encoder(m);
     bind_RS_Decoder(m);
     bind_RS_Encoder(m);

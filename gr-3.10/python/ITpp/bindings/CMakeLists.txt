@@ -32,6 +32,7 @@ list(APPEND ITpp_python_files
     BCH_Decoder_python.cc
     BCH_Encoder_python.cc
     Hamming_Decoder_python.cc
+    Hamming_Soft_Decoder_python.cc
     Hamming_Encoder_python.cc
     RS_Decoder_python.cc
     RS_Encoder_python.cc

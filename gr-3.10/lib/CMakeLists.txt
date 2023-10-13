@@ -15,6 +15,7 @@ list(APPEND ITpp_sources
     BCH_Decoder_impl.cc
     BCH_Encoder_impl.cc
     Hamming_Decoder_impl.cc
+    Hamming_Soft_Decoder_impl.cc
     Hamming_Encoder_impl.cc
     RS_Decoder_impl.cc
     RS_Encoder_impl.cc

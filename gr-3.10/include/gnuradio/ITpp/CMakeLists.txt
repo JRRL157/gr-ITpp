@@ -14,6 +14,7 @@ install(FILES
     BCH_Decoder.h
     BCH_Encoder.h
     Hamming_Decoder.h
+    Hamming_Soft_Decoder.h
     Hamming_Encoder.h
     RS_Decoder.h
     RS_Encoder.h

@@ -10,6 +10,7 @@ install(FILES
     ITpp_BCH_Decoder.block.yml
     ITpp_BCH_Encoder.block.yml
     ITpp_Hamming_Decoder.block.yml
+    ITpp_Hamming_Soft_Decoder.block.yml
     ITpp_Hamming_Encoder.block.yml
     ITpp_RS_Decoder.block.yml
     ITpp_RS_Encoder.block.yml
