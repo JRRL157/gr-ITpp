@@ -45,10 +45,10 @@ Hamming_Soft_Decoder_impl::Hamming_Soft_Decoder_impl(int m)
           int bit = (i >> j) & 1; // Obtém o bit na posição j
           u.set(j,bit);
       }
-      vecPrint(u);
+      //vecPrint(u);
       this->U.append_row(u);
       itpp::bvec v = vecMultMat(u,Gt);
-      vecPrint(v);
+      //vecPrint(v);
       C.append_row(v);
   }
 
@@ -68,7 +68,7 @@ Hamming_Soft_Decoder_impl::Hamming_Soft_Decoder_impl(int m)
 
   for(int i = 0;i<A.rows();i++){
     itpp::Vec<float> row = A.get_row(i);
-    vecPrint(row);
+    //vecPrint(row);
   }
 
   set_output_multiple(d_K);
@@ -107,8 +107,7 @@ int Hamming_Soft_Decoder_impl::general_work(int noutput_items,
       encoded(j) = in[d_N*i+j];
     }
 
-    decoded = 0xff;
-    soft_decode(encoded);
+    decoded = soft_decode(encoded);
 
     for(int j = 0; j < d_K; j++){
       out[d_K*i+j] = (int)decoded.get(j);
@@ -194,15 +193,14 @@ itpp::bmat Hamming_Soft_Decoder_impl::identityMatrix(int N)
 itpp::bvec Hamming_Soft_Decoder_impl::soft_decode(itpp::Vec<float>& encoded)
 {
   itpp::bvec bvec;
-  if(++flag <= 100){
-    //std::printf("A = (%d,%d)\n",A.rows(),A.cols());
-    itpp::Mat<float> At = this->A.transpose();
-    itpp::Vec<float> B = vecMultMat(encoded,At);
-    vecPrint(B);
-    int maxIndex = getMaxElementIndex(B);
-    bvec = U.get_row(maxIndex);
-    vecPrint(bvec);
-  }
+
+  itpp::Mat<float> At = this->A.transpose();
+  itpp::Vec<float> B = vecMultMat(encoded,At);
+  //vecPrint(B);
+  int maxIndex = getMaxElementIndex(B);
+  bvec = U.get_row(maxIndex);
+  //vecPrint(bvec);
+  
   return bvec;
 }
 

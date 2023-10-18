@@ -178,8 +178,8 @@ class Hamming_exemplo(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_0_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_0_win)
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
-            8, #size
-            32000, #samp_rate
+            1024, #size
+            320000, #samp_rate
             "", #name
             1, #number of inputs
             None # parent
@@ -225,7 +225,7 @@ class Hamming_exemplo(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.blocks_vector_source_x_0 = blocks.vector_source_b((1,1,0,0), True, 1, [])
+        self.blocks_vector_source_x_0 = blocks.vector_source_b((1,1,1,0), True, 1, [])
         self.blocks_uchar_to_float_0_0 = blocks.uchar_to_float()
         self.blocks_uchar_to_float_0 = blocks.uchar_to_float()
         self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
