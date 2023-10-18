@@ -19,8 +19,9 @@ class Hamming_Soft_Decoder_impl : public Hamming_Soft_Decoder {
 private:
   int d_m;
   int d_K, d_N;
+  itpp::bmat U;
   itpp::Mat<float> A;
-  bool flag = false;
+  int flag = 0;
 public:
   Hamming_Soft_Decoder_impl(int m);
   ~Hamming_Soft_Decoder_impl();
@@ -40,7 +41,8 @@ public:
   
   itpp::bvec bvecMultbMat(itpp::bvec& v, itpp::bmat &mat);
   itpp::bmat identityMatrix(int N);
-  itpp::bvec soft_decode(itpp::bvec& encoded);
+  itpp::bvec soft_decode(itpp::Vec<float>& encoded);
+  int getMaxElementIndex(itpp::Vec<float>& vec);
 };
 
 } // namespace ITpp

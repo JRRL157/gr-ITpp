@@ -28,7 +28,7 @@ parameters:
 inputs:
 - label: in
   domain: stream
-  dtype: byte
+  dtype: float
   optional: false
 #  vlen: ...
 

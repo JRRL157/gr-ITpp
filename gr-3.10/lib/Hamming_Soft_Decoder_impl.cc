@@ -11,7 +11,7 @@
 namespace gr {
 namespace ITpp {
 
-using input_type = unsigned char;
+using input_type = float;
 using output_type = unsigned char;
 Hamming_Soft_Decoder::sptr Hamming_Soft_Decoder::make(int m) {
   return gnuradio::make_block_sptr<Hamming_Soft_Decoder_impl>(m);
@@ -45,7 +45,8 @@ Hamming_Soft_Decoder_impl::Hamming_Soft_Decoder_impl(int m)
           int bit = (i >> j) & 1; // Obtém o bit na posição j
           u.set(j,bit);
       }
-      
+      vecPrint(u);
+      this->U.append_row(u);
       itpp::bvec v = vecMultMat(u,Gt);
       vecPrint(v);
       C.append_row(v);
@@ -69,8 +70,6 @@ Hamming_Soft_Decoder_impl::Hamming_Soft_Decoder_impl(int m)
     itpp::Vec<float> row = A.get_row(i);
     vecPrint(row);
   }
-  
-  std::printf("HEYA!");
 
   set_output_multiple(d_K);
 }
@@ -93,7 +92,8 @@ int Hamming_Soft_Decoder_impl::general_work(int noutput_items,
   auto in = static_cast<const input_type *>(input_items[0]);
   auto out = static_cast<output_type *>(output_items[0]);
 
-  itpp::bvec decoded,decoded2, encoded;
+  itpp::bvec decoded,decoded2;
+  itpp::Vec<float> encoded;
   encoded.set_length(d_N);
   encoded.zeros();
   itpp::Hamming_Code block(d_m);
@@ -107,7 +107,7 @@ int Hamming_Soft_Decoder_impl::general_work(int noutput_items,
       encoded(j) = in[d_N*i+j];
     }
 
-    decoded = block.decode(encoded);
+    decoded = 0xff;
     soft_decode(encoded);
 
     for(int j = 0; j < d_K; j++){
@@ -125,8 +125,18 @@ void Hamming_Soft_Decoder_impl::vecPrint(itpp::Vec<T> &x)
 {
   int L = x.size();
 
-  for(int i = 0;i < L;i++)
-    std::printf("%d ",(int)x.get(i));
+  if (std::is_same<T, float>::value) {
+    for(int i = 0; i < L; i++)
+      std::printf("%.2f ", (float)x.get(i));
+  }else if (std::is_same<T, double>::value) {
+    for(int i = 0; i < L; i++)
+      std::printf("%.2f ", (double)x.get(i));
+  }
+  else {
+    for(int i = 0; i < L; i++)
+      std::printf("%d ", (int)x.get(i));
+  }
+  
   std::printf("\n");
 }
 
@@ -139,7 +149,7 @@ itpp::Vec<T> Hamming_Soft_Decoder_impl::vecMultMat(itpp::Vec<T> &v, itpp::Mat<T>
     itpp::Vec<T> result(mat.rows());
 
     for (int row = 0; row < mat.rows(); ++row) {
-        T rowResult = 0;
+        T rowResult = 0.0;
         for (int col = 0; col < mat.cols(); ++col) {
             // Realize a multiplicação bit a bit e adicione ao resultado da linha.
             rowResult += (T)v.get(col) * (T)mat(row, col);
@@ -181,25 +191,29 @@ itpp::bmat Hamming_Soft_Decoder_impl::identityMatrix(int N)
     return identity;
 }
 
-itpp::bvec Hamming_Soft_Decoder_impl::soft_decode(itpp::bvec& encoded)
+itpp::bvec Hamming_Soft_Decoder_impl::soft_decode(itpp::Vec<float>& encoded)
 {
   itpp::bvec bvec;
-  if(!flag){
-    itpp::Vec<float> v;
-    v.set_length(encoded.length());
-    v.zeros();
-    
-    for(int i = 0;i<encoded.length();i++)
-      v.set(i,encoded.get(i));
-
-    std::printf("A = (%d,%d)\n",A.rows(),A.cols());
-    itpp::Mat<float> At = A.transpose();
-    itpp::Vec<float> B = vecMultMat(v,At);
+  if(++flag <= 100){
+    //std::printf("A = (%d,%d)\n",A.rows(),A.cols());
+    itpp::Mat<float> At = this->A.transpose();
+    itpp::Vec<float> B = vecMultMat(encoded,At);
     vecPrint(B);
-    
-    this->flag = true;
+    int maxIndex = getMaxElementIndex(B);
+    bvec = U.get_row(maxIndex);
+    vecPrint(bvec);
   }
   return bvec;
+}
+
+int Hamming_Soft_Decoder_impl::getMaxElementIndex(itpp::Vec<float>& vec) {
+    int maxIndex = 0; // Assume the first element is the maximum.
+    int size = vec.length();
+
+    for (int i = 1; i < size; i++)
+        maxIndex = (float)vec.get(i) > (float)vec.get(maxIndex) ? i : maxIndex;
+
+    return maxIndex;
 }
 
 } /* namespace ITpp */
