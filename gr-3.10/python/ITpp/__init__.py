@@ -20,4 +20,6 @@ except ModuleNotFoundError:
     pass
 
 # import any pure python here
+from .BER_Analyzer import BER_Analyzer
+from .vector_source_adder import vector_source_adder
 #
