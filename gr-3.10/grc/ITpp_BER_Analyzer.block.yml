@@ -16,7 +16,7 @@ templates:
 parameters:
 - id: Eb_N0_dB
   label: Eb_N0_dB
-  dtype: float_vector
+  dtype: int
   # default: You need to fill in your grc/ITpp_Hamming_Decoder.block.yaml
 
 #  Make one 'inputs' list entry per input and one 'outputs' list entry per output.
@@ -30,11 +30,11 @@ inputs:
 - label: _N
   domain: stream
   dtype: int
-  optional: false
+  optional: true
 - label: _K
   domain: stream
   dtype: int
-  optional: false
+  optional: true
 - label: num_bits
   domain: stream
   dtype: int
@@ -42,15 +42,15 @@ inputs:
 - label: source
   domain: stream
   dtype: byte
-  optional: false
+  optional: true
 - label: decoded0
   domain: stream
   dtype: byte
-  optional: false
+  optional: true
 - label: decoded1
   domain: stream
   dtype: byte
-  optional: false
+  optional: true
 #  vlen: ...
 
 outputs:

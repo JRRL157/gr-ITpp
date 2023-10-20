@@ -112,7 +112,7 @@ class Hamming_exemplo(gr.top_block, Qt.QWidget):
             1.0, 1.0, 1.0, 1.0, 1.0]
         styles = [1, 1, 1, 1, 1,
             1, 1, 1, 1, 1]
-        markers = [0, 0, -1, -1, -1,
+        markers = [0, 0, 2, -1, -1,
             -1, -1, -1, -1, -1]
 
 
@@ -130,8 +130,8 @@ class Hamming_exemplo(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_1_win = sip.wrapinstance(self.qtgui_time_sink_x_1.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_1_win)
         self.qtgui_time_sink_x_0_0 = qtgui.time_sink_f(
-            8, #size
-            32000, #samp_rate
+            1024, #size
+            320000, #samp_rate
             "", #name
             1, #number of inputs
             None # parent
@@ -234,7 +234,7 @@ class Hamming_exemplo(gr.top_block, Qt.QWidget):
         self.blocks_add_xx_1 = blocks.add_vff(1)
         self.blocks_add_xx_0 = blocks.add_vff(1)
         self.blocks_add_const_vxx_0 = blocks.add_const_ff(-1)
-        self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, 0.1, 0)
+        self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, 0.5, 0)
         self.ITpp_Hamming_Soft_Decoder_0 = ITpp.Hamming_Soft_Decoder(3)
         self.ITpp_Hamming_Encoder_0 = ITpp.Hamming_Encoder(3)
         self.ID = Qt.QTabWidget()
@@ -257,9 +257,9 @@ class Hamming_exemplo(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_add_const_vxx_0, 0), (self.qtgui_time_sink_x_1, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blocks_add_xx_1, 0), (self.ITpp_Hamming_Soft_Decoder_0, 0))
-        self.connect((self.blocks_add_xx_1, 0), (self.qtgui_time_sink_x_1, 0))
+        self.connect((self.blocks_add_xx_1, 0), (self.qtgui_time_sink_x_1, 2))
         self.connect((self.blocks_char_to_float_0, 0), (self.blocks_add_const_vxx_0, 0))
-        self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1, 2))
+        self.connect((self.blocks_char_to_float_0, 0), (self.qtgui_time_sink_x_1, 0))
         self.connect((self.blocks_tags_strobe_0, 0), (self.blocks_add_xx_0, 1))
         self.connect((self.blocks_throttle_0, 0), (self.ITpp_Hamming_Encoder_0, 0))
         self.connect((self.blocks_uchar_to_float_0, 0), (self.blocks_add_xx_0, 0))

@@ -14,5 +14,7 @@ install(FILES
     ITpp_Hamming_Encoder.block.yml
     ITpp_RS_Decoder.block.yml
     ITpp_RS_Encoder.block.yml
-    ITpp_BSC_Byte.block.yml DESTINATION share/gnuradio/grc/blocks
+    ITpp_BSC_Byte.block.yml
+    ITpp_BER_Analyzer.block.yml
+    ITpp_vector_source_adder.block.yml DESTINATION share/gnuradio/grc/blocks
 )

@@ -45,37 +45,90 @@ blocks:
     coordinate: [184, 12]
     rotation: 0
     state: enabled
-- name: blocks_add_xx_0
-  id: blocks_add_xx
+- name: ITpp_BER_Analyzer_0
+  id: ITpp_BER_Analyzer
   parameters:
+    Eb_N0_dB: '10'
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
-    num_inputs: '2'
-    type: float
-    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 160.0]
+    coordinate: [312, 112.0]
     rotation: 0
     state: true
-- name: blocks_float_to_uchar_0
-  id: blocks_float_to_uchar
+- name: analog_const_source_x_0
+  id: analog_const_source_x
   parameters:
     affinity: ''
     alias: ''
     comment: ''
+    const: '7'
     maxoutbuf: '0'
     minoutbuf: '0'
+    type: int
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [520, 176.0]
+    coordinate: [48, 92.0]
+    rotation: 0
+    state: true
+- name: analog_const_source_x_0_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '4'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: int
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 132.0]
+    rotation: 0
+    state: true
+- name: analog_const_source_x_0_1
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '1000'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: int
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 172.0]
+    rotation: 0
+    state: true
+- name: blocks_packed_to_unpacked_xx_0
+  id: blocks_packed_to_unpacked_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    bits_per_chunk: '4'
+    comment: ''
+    endianness: gr.GR_MSB_FIRST
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_ports: '1'
+    type: byte
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [696, 180.0]
     rotation: 0
     state: true
 - name: blocks_throttle_0
@@ -94,7 +147,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [688, 172.0]
+    coordinate: [504, 188.0]
     rotation: 0
     state: true
 - name: blocks_uchar_to_float_0
@@ -109,40 +162,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [880, 176.0]
+    coordinate: [896, 192.0]
     rotation: 0
     state: true
-- name: blocks_uchar_to_float_0_0
-  id: blocks_uchar_to_float
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [216, 152.0]
-    rotation: 0
-    state: true
-- name: blocks_uchar_to_float_0_1
-  id: blocks_uchar_to_float
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [232, 232.0]
-    rotation: 0
-    state: true
-- name: blocks_vector_source_x_0_0
+- name: blocks_vector_source_x_0_0_0
   id: blocks_vector_source_x
   parameters:
     affinity: ''
@@ -153,16 +176,36 @@ blocks:
     repeat: 'True'
     tags: '[]'
     type: byte
-    vector: (0, 0,0,0)
+    vector: (1, 1,0,0)
     vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 212.0]
+    coordinate: [48, 212.0]
     rotation: 0
     state: true
-- name: blocks_vector_source_x_0_0_0
+- name: blocks_vector_source_x_0_0_1
+  id: blocks_vector_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    repeat: 'True'
+    tags: '[]'
+    type: byte
+    vector: (0, 1,0,0)
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [48, 284.0]
+    rotation: 0
+    state: true
+- name: blocks_vector_source_x_0_0_2
   id: blocks_vector_source_x
   parameters:
     affinity: ''
@@ -179,7 +222,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 124.0]
+    coordinate: [48, 356.0]
     rotation: 0
     state: true
 - name: qtgui_time_sink_x_0
@@ -237,7 +280,7 @@ blocks:
     marker9: '-1'
     name: '""'
     nconnections: '1'
-    size: '32'
+    size: '256'
     srate: samp_rate
     stemplot: 'False'
     style1: '1'
@@ -276,19 +319,21 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1056, 156.0]
+    coordinate: [1072, 172.0]
     rotation: 0
     state: true
 
 connections:
-- [blocks_add_xx_0, '0', blocks_float_to_uchar_0, '0']
-- [blocks_float_to_uchar_0, '0', blocks_throttle_0, '0']
-- [blocks_throttle_0, '0', blocks_uchar_to_float_0, '0']
+- [ITpp_BER_Analyzer_0, '0', blocks_throttle_0, '0']
+- [analog_const_source_x_0, '0', ITpp_BER_Analyzer_0, '0']
+- [analog_const_source_x_0_0, '0', ITpp_BER_Analyzer_0, '1']
+- [analog_const_source_x_0_1, '0', ITpp_BER_Analyzer_0, '2']
+- [blocks_packed_to_unpacked_xx_0, '0', blocks_uchar_to_float_0, '0']
+- [blocks_throttle_0, '0', blocks_packed_to_unpacked_xx_0, '0']
 - [blocks_uchar_to_float_0, '0', qtgui_time_sink_x_0, '0']
-- [blocks_uchar_to_float_0_0, '0', blocks_add_xx_0, '0']
-- [blocks_uchar_to_float_0_1, '0', blocks_add_xx_0, '1']
-- [blocks_vector_source_x_0_0, '0', blocks_uchar_to_float_0_1, '0']
-- [blocks_vector_source_x_0_0_0, '0', blocks_uchar_to_float_0_0, '0']
+- [blocks_vector_source_x_0_0_0, '0', ITpp_BER_Analyzer_0, '3']
+- [blocks_vector_source_x_0_0_1, '0', ITpp_BER_Analyzer_0, '4']
+- [blocks_vector_source_x_0_0_2, '0', ITpp_BER_Analyzer_0, '5']
 
 metadata:
   file_format: 1

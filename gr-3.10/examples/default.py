@@ -25,6 +25,7 @@ from gnuradio import qtgui
 from gnuradio.filter import firdes
 import sip
 from gnuradio import ITpp
+from gnuradio import analog
 from gnuradio import blocks
 from gnuradio import gr
 from gnuradio.fft import window
@@ -33,12 +34,12 @@ import signal
 from argparse import ArgumentParser
 from gnuradio.eng_arg import eng_float, intx
 from gnuradio import eng_notation
-import numpy as np
+
 
 
 from gnuradio import qtgui
 
-class vector_adder(gr.top_block, Qt.QWidget):
+class default(gr.top_block, Qt.QWidget):
 
     def __init__(self):
         gr.top_block.__init__(self, "Not titled yet", catch_exceptions=True)
@@ -61,7 +62,7 @@ class vector_adder(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "vector_adder")
+        self.settings = Qt.QSettings("GNU Radio", "default")
 
         try:
             if StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
@@ -74,13 +75,13 @@ class vector_adder(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 32000
+        self.samp_rate = samp_rate = 320000
 
         ##################################################
         # Blocks
         ##################################################
         self.qtgui_time_sink_x_0 = qtgui.time_sink_f(
-            1024, #size
+            256, #size
             samp_rate, #samp_rate
             "", #name
             1, #number of inputs
@@ -93,7 +94,7 @@ class vector_adder(gr.top_block, Qt.QWidget):
 
         self.qtgui_time_sink_x_0.enable_tags(True)
         self.qtgui_time_sink_x_0.set_trigger_mode(qtgui.TRIG_MODE_FREE, qtgui.TRIG_SLOPE_POS, 0.0, 0, 0, "")
-        self.qtgui_time_sink_x_0.enable_autoscale(False)
+        self.qtgui_time_sink_x_0.enable_autoscale(True)
         self.qtgui_time_sink_x_0.enable_grid(False)
         self.qtgui_time_sink_x_0.enable_axis_labels(True)
         self.qtgui_time_sink_x_0.enable_control_panel(False)
@@ -127,23 +128,35 @@ class vector_adder(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
-        self.blocks_vector_source_x_0_0 = blocks.vector_source_b((0, 0, 1,0), True, 1, [])
-        self.blocks_vector_source_x_0 = blocks.vector_source_b((1, 0, 0,1), True, 1, [])
+        self.blocks_vector_source_x_0_0_2 = blocks.vector_source_b((0, 0,0,1), True, 1, [])
+        self.blocks_vector_source_x_0_0_1 = blocks.vector_source_b((0, 1,0,0), True, 1, [])
+        self.blocks_vector_source_x_0_0_0 = blocks.vector_source_b((1, 1,0,0), True, 1, [])
         self.blocks_uchar_to_float_0 = blocks.uchar_to_float()
-        self.ITpp_vector_source_adder_0 = ITpp.vector_source_adder()
+        self.blocks_throttle_0 = blocks.throttle(gr.sizeof_char*1, samp_rate,True)
+        self.blocks_packed_to_unpacked_xx_0 = blocks.packed_to_unpacked_bb(4, gr.GR_MSB_FIRST)
+        self.analog_const_source_x_0_1 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 1000)
+        self.analog_const_source_x_0_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 4)
+        self.analog_const_source_x_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 7)
+        self.ITpp_BER_Analyzer_0 = ITpp.BER_Analyzer(10)
 
 
         ##################################################
         # Connections
         ##################################################
-        self.connect((self.ITpp_vector_source_adder_0, 0), (self.blocks_uchar_to_float_0, 0))
+        self.connect((self.ITpp_BER_Analyzer_0, 0), (self.blocks_throttle_0, 0))
+        self.connect((self.analog_const_source_x_0, 0), (self.ITpp_BER_Analyzer_0, 0))
+        self.connect((self.analog_const_source_x_0_0, 0), (self.ITpp_BER_Analyzer_0, 1))
+        self.connect((self.analog_const_source_x_0_1, 0), (self.ITpp_BER_Analyzer_0, 2))
+        self.connect((self.blocks_packed_to_unpacked_xx_0, 0), (self.blocks_uchar_to_float_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.blocks_packed_to_unpacked_xx_0, 0))
         self.connect((self.blocks_uchar_to_float_0, 0), (self.qtgui_time_sink_x_0, 0))
-        self.connect((self.blocks_vector_source_x_0, 0), (self.ITpp_vector_source_adder_0, 0))
-        self.connect((self.blocks_vector_source_x_0_0, 0), (self.ITpp_vector_source_adder_0, 1))
+        self.connect((self.blocks_vector_source_x_0_0_0, 0), (self.ITpp_BER_Analyzer_0, 3))
+        self.connect((self.blocks_vector_source_x_0_0_1, 0), (self.ITpp_BER_Analyzer_0, 4))
+        self.connect((self.blocks_vector_source_x_0_0_2, 0), (self.ITpp_BER_Analyzer_0, 5))
 
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "vector_adder")
+        self.settings = Qt.QSettings("GNU Radio", "default")
         self.settings.setValue("geometry", self.saveGeometry())
         self.stop()
         self.wait()
@@ -155,12 +168,13 @@ class vector_adder(gr.top_block, Qt.QWidget):
 
     def set_samp_rate(self, samp_rate):
         self.samp_rate = samp_rate
+        self.blocks_throttle_0.set_sample_rate(self.samp_rate)
         self.qtgui_time_sink_x_0.set_samp_rate(self.samp_rate)
 
 
 
 
-def main(top_block_cls=vector_adder, options=None):
+def main(top_block_cls=default, options=None):
 
     if StrictVersion("4.5.0") <= StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
         style = gr.prefs().get_string('qtgui', 'style', 'raster')
