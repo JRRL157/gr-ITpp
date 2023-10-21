@@ -17,7 +17,7 @@ class BER_Analyzer(gr.basic_block):
     """
     def __init__(self, Eb_N0_dB=10):
         gr.basic_block.__init__(self,name="BER_Analyzer",in_sig=[np.int32,np.int32,np.int32,np.byte,np.byte,np.byte],
-            out_sig=[np.byte])
+            out_sig=[])
         self.Eb_N0_dB = Eb_N0_dB
 
     def forecast(self, noutput_items, ninputs):
@@ -32,22 +32,18 @@ class BER_Analyzer(gr.basic_block):
     def general_work(self, input_items, output_items):
         # For this sample code, the general block is made to behave like a sync block
         ninput_items = min([len(items) for items in input_items])
-        noutput_items = min(len(output_items[0]), ninput_items)
+        noutput_items = 0
         
         in3 = input_items[3]
         in4 = input_items[4]
         in5 = input_items[5]
         sleep(1)
-        sum = in3+in4+in5;
-        sum = sum % 2
-        print(sum,len(sum))
-        try:
-            #np.random.seed(7)
-            output_items[0][:] = 0xFF
-            print(type(output_items)[0][:])
+        try:            
+            sum = in3+in4+in5;
+            sum = np.array([np.byte(x % 2) for x in sum])                              
         except:
             None
         
-        #self.consume_each(noutput_items)
+        self.consume_each(noutput_items)
         return noutput_items
 

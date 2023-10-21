@@ -30,19 +30,19 @@ inputs:
 - label: _N
   domain: stream
   dtype: int
-  optional: true
+  optional: false
 - label: _K
   domain: stream
   dtype: int
-  optional: true
+  optional: false
 - label: num_bits
   domain: stream
   dtype: int
-  optional: true
+  optional: false
 - label: source
   domain: stream
   dtype: byte
-  optional: true
+  optional: false
 - label: decoded0
   domain: stream
   dtype: byte
@@ -52,12 +52,6 @@ inputs:
   dtype: byte
   optional: true
 #  vlen: ...
-
-outputs:
-- label: out
-  domain: stream
-  dtype: byte
-  optional: false
 #  vlen: ...
 
 #  'file_format' specifies the version of the GRC yml format used in the file
