@@ -35,16 +35,24 @@ class BER_Analyzer(gr.basic_block):
 
         m: np.int32 = n - k
 
-        float2uchar = blocks.float_to_uchar()
-        uchar2float = blocks.uchar_to_float()
-        adder = blocks.add_vff()
+        throttle_block = blocks.throttle(itemsize=1,samples_per_sec=320000)
+        
+        #ATENÇÃO AQUI!!!
+        add_const_block = blocks.blocks_python.add_const_vff([1,1,1])
+        
+        float2uchar_block = blocks.float_to_uchar()
+        uchar2float_block = blocks.uchar_to_float()
+        adder_block = blocks.add_vff()
         noise_source_float_block = analog.noise_source_f(type=analog.noise_type_t.GR_GAUSSIAN, ampl=0.5, seed=-1)
         random_source_block = gr.random(seed=7, min_integer=0, max_integer=2)
         encoder_block = Hamming_Encoder(m)
         hard_decoder_block = Hamming_Decoder(m)
         soft_decoder_block = Hamming_Soft_Decoder(m)
 
+        #tb.connect()
+
         tb.run()
+        output_data1 = random_source_block.ran1().real
 
         print("CHEGOU AQUI!")
         in3 = input_items[3]
