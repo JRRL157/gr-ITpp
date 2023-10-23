@@ -49,7 +49,7 @@ blocks:
   id: variable
   parameters:
     comment: ''
-    value: '320000'
+    value: '32000'
   states:
     bus_sink: false
     bus_source: false
@@ -94,10 +94,12 @@ blocks:
 - name: ITpp_BER_Analyzer_0
   id: ITpp_BER_Analyzer
   parameters:
-    Eb_N0_dB: '10'
     affinity: ''
     alias: ''
     comment: ''
+    init_Eb_N0_dB: '0'
+    max_Eb_N0_dB: '11.0'
+    step_Eb_N0_dB: '1.0'
   states:
     bus_sink: false
     bus_source: false
@@ -209,12 +211,12 @@ blocks:
   parameters:
     affinity: ''
     alias: ''
-    amp: '0.5'
+    amp: '0.3'
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
     noise_type: analog.GR_GAUSSIAN
-    seed: '0'
+    seed: '7'
     type: float
   states:
     bus_sink: false
@@ -233,7 +235,7 @@ blocks:
     maxoutbuf: '0'
     min: '0'
     minoutbuf: '0'
-    num_samps: '1000000'
+    num_samps: '10000'
     repeat: 'True'
     type: byte
   states:
@@ -258,7 +260,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1336, 260.0]
+    coordinate: [1376, 252.0]
     rotation: 0
     state: true
 - name: blocks_add_xx_0
@@ -297,6 +299,24 @@ blocks:
     coordinate: [1576, 168.0]
     rotation: 0
     state: true
+- name: blocks_add_xx_1_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1568, 344.0]
+    rotation: 0
+    state: true
 - name: blocks_char_to_float_0
   id: blocks_char_to_float
   parameters:
@@ -311,7 +331,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1160, 324.0]
+    coordinate: [1200, 292.0]
     rotation: 0
     state: true
 - name: blocks_float_to_uchar_0
@@ -438,6 +458,21 @@ blocks:
     coordinate: [936, 232.0]
     rotation: 0
     state: true
+- name: blocks_uchar_to_float_2
+  id: blocks_uchar_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1200, 376.0]
+    rotation: 0
+    state: true
 - name: blocks_vector_source_x_0
   id: blocks_vector_source_x
   parameters:
@@ -513,7 +548,7 @@ blocks:
     marker9: '-1'
     name: '""'
     nconnections: '1'
-    size: '1024'
+    size: '64'
     srate: '320000'
     stemplot: 'False'
     style1: '1'
@@ -555,103 +590,6 @@ blocks:
     coordinate: [1112, 212.0]
     rotation: 0
     state: enabled
-- name: qtgui_time_sink_x_1
-  id: qtgui_time_sink_x
-  parameters:
-    affinity: ''
-    alias: ''
-    alpha1: '1.0'
-    alpha10: '1.0'
-    alpha2: '1.0'
-    alpha3: '1.0'
-    alpha4: '1.0'
-    alpha5: '1.0'
-    alpha6: '1.0'
-    alpha7: '1.0'
-    alpha8: '1.0'
-    alpha9: '1.0'
-    autoscale: 'False'
-    axislabels: 'True'
-    color1: blue
-    color10: dark blue
-    color2: red
-    color3: green
-    color4: black
-    color5: cyan
-    color6: magenta
-    color7: yellow
-    color8: dark red
-    color9: dark green
-    comment: ''
-    ctrlpanel: 'False'
-    entags: 'True'
-    grid: 'False'
-    gui_hint: ''
-    label1: Signal 1
-    label10: Signal 10
-    label2: Signal 2
-    label3: Signal 3
-    label4: Signal 4
-    label5: Signal 5
-    label6: Signal 6
-    label7: Signal 7
-    label8: Signal 8
-    label9: Signal 9
-    legend: 'True'
-    marker1: '0'
-    marker10: '-1'
-    marker2: '0'
-    marker3: '2'
-    marker4: '-1'
-    marker5: '-1'
-    marker6: '-1'
-    marker7: '-1'
-    marker8: '-1'
-    marker9: '-1'
-    name: '""'
-    nconnections: '3'
-    size: '1024'
-    srate: samp_rate
-    stemplot: 'True'
-    style1: '1'
-    style10: '1'
-    style2: '1'
-    style3: '1'
-    style4: '1'
-    style5: '1'
-    style6: '1'
-    style7: '1'
-    style8: '1'
-    style9: '1'
-    tr_chan: '0'
-    tr_delay: '0'
-    tr_level: '0.0'
-    tr_mode: qtgui.TRIG_MODE_FREE
-    tr_slope: qtgui.TRIG_SLOPE_POS
-    tr_tag: '""'
-    type: float
-    update_time: '0.10'
-    width1: '1'
-    width10: '1'
-    width2: '1'
-    width3: '1'
-    width4: '1'
-    width5: '1'
-    width6: '1'
-    width7: '1'
-    width8: '1'
-    width9: '1'
-    ylabel: Amplitude
-    ymax: '1'
-    ymin: '-1'
-    yunit: '""'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1376.0, 384]
-    rotation: 270
-    state: disabled
 - name: qtgui_time_sink_x_1_0
   id: qtgui_time_sink_x
   parameters:
@@ -707,7 +645,7 @@ blocks:
     marker9: '-1'
     name: '""'
     nconnections: '2'
-    size: '1024'
+    size: '64'
     srate: samp_rate
     stemplot: 'True'
     style1: '1'
@@ -739,8 +677,8 @@ blocks:
     width8: '1'
     width9: '1'
     ylabel: Amplitude
-    ymax: '1'
-    ymin: '-1'
+    ymax: '3'
+    ymin: '0'
     yunit: '""'
   states:
     bus_sink: false
@@ -754,21 +692,20 @@ connections:
 - [ITpp_Hamming_Decoder_0, '0', ITpp_BER_Analyzer_0, '5']
 - [ITpp_Hamming_Decoder_0, '0', blocks_uchar_to_float_0_1_0, '0']
 - [ITpp_Hamming_Encoder_0, '0', blocks_char_to_float_0, '0']
+- [ITpp_Hamming_Encoder_0, '0', blocks_uchar_to_float_2, '0']
 - [ITpp_Hamming_Soft_Decoder_0, '0', ITpp_BER_Analyzer_0, '4']
 - [ITpp_Hamming_Soft_Decoder_0, '0', blocks_uchar_to_float_0_1, '0']
 - [analog_const_source_x_0_1, '0', ITpp_BER_Analyzer_0, '0']
 - [analog_const_source_x_0_1_0, '0', ITpp_BER_Analyzer_0, '1']
 - [analog_const_source_x_0_1_1, '0', ITpp_BER_Analyzer_0, '2']
 - [analog_noise_source_x_0, '0', blocks_add_xx_1, '0']
+- [analog_noise_source_x_0, '0', blocks_add_xx_1_0, '0']
 - [analog_random_source_x_0, '0', blocks_uchar_to_float_0_0, '0']
 - [blocks_add_const_vxx_0, '0', blocks_add_xx_1, '1']
-- [blocks_add_const_vxx_0, '0', qtgui_time_sink_x_1, '1']
 - [blocks_add_xx_0, '0', blocks_float_to_uchar_1, '0']
 - [blocks_add_xx_1, '0', ITpp_Hamming_Soft_Decoder_0, '0']
-- [blocks_add_xx_1, '0', blocks_float_to_uchar_0, '0']
-- [blocks_add_xx_1, '0', qtgui_time_sink_x_1, '2']
+- [blocks_add_xx_1_0, '0', blocks_float_to_uchar_0, '0']
 - [blocks_char_to_float_0, '0', blocks_add_const_vxx_0, '0']
-- [blocks_char_to_float_0, '0', qtgui_time_sink_x_1, '0']
 - [blocks_float_to_uchar_0, '0', ITpp_Hamming_Decoder_0, '0']
 - [blocks_float_to_uchar_1, '0', ITpp_BER_Analyzer_0, '3']
 - [blocks_float_to_uchar_1, '0', blocks_throttle_0, '0']
@@ -779,6 +716,7 @@ connections:
 - [blocks_uchar_to_float_0_1, '0', qtgui_time_sink_x_1_0, '0']
 - [blocks_uchar_to_float_0_1_0, '0', qtgui_time_sink_x_1_0, '1']
 - [blocks_uchar_to_float_1, '0', qtgui_time_sink_x_0_1, '0']
+- [blocks_uchar_to_float_2, '0', blocks_add_xx_1_0, '1']
 - [blocks_vector_source_x_0, '0', blocks_uchar_to_float_0, '0']
 
 metadata:

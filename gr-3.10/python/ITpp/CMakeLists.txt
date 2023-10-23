@@ -23,7 +23,7 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     BER_Analyzer.py
-    vector_source_adder.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/ITpp
+    counter.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/ITpp
 )
 
 ########################################################################

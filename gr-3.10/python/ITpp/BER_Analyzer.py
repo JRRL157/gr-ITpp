@@ -13,11 +13,15 @@ class BER_Analyzer(gr.basic_block):
     docstring for block BER_Analyzer
     """
 
-    def __init__(self, Eb_N0_dB=10):
+    def __init__(self, init_Eb_N0_dB=0.0, max_Eb_N0_dB=10.0,step_Eb_N0_dB = 1.0):
         gr.basic_block.__init__(self, name="BER_Analyzer",
                                 in_sig=[np.int32, np.int32, np.int32, np.byte, np.byte, np.byte],
                                 out_sig=[])
-        self.Eb_N0_dB = Eb_N0_dB
+        self._init_Eb_N0_dB = init_Eb_N0_dB
+        self._max_Eb_N0_dB = max_Eb_N0_dB
+        self._step_Eb_N0_dB = step_Eb_N0_dB;
+
+        self._counter = self._init_Eb_N0_dB;
 
     def forecast(self, noutput_items, ninputs):
         ninput_items_required = [noutput_items] * ninputs
@@ -27,7 +31,7 @@ class BER_Analyzer(gr.basic_block):
         ninput_items = min([len(items) for items in input_items])
         noutput_items = 1
 
-        tb = gr.top_block()
+        #tb = gr.top_block()
 
         n: np.int32 = input_items[0][0]
         k: np.int32 = input_items[1][0]
@@ -35,6 +39,7 @@ class BER_Analyzer(gr.basic_block):
 
         m: np.int32 = n - k
 
+        '''     
         throttle_block = blocks.throttle(itemsize=1,samples_per_sec=320000)
         
         #ATENÇÃO AQUI!!!
@@ -52,22 +57,23 @@ class BER_Analyzer(gr.basic_block):
         #tb.connect()
 
         tb.run()
-        output_data1 = random_source_block.ran1().real
+        output_data1 = random_source_block.ran1().real'''
 
-        print("CHEGOU AQUI!")
         in3 = input_items[3]
         in4 = input_items[4]
         in5 = input_items[5]
-        sleep(1)
+        
+        #sleep(1)
         try:
-            print("in3 = ", in3)
-            print("in4 = ", in4)
-            print("in5 = ", in5)
-            print("CHEGOU AQUI 2!")
+            Lmin = min(len(in3),len(in4),len(in5))
+            e_soft = (in3[:Lmin] - in4[:Lmin]) % 2
+            e_hard = (in3[:Lmin] - in5[:Lmin]) % 2
+            #print(self._counter)
+            self._counter = (self._counter + self._step_Eb_N0_dB) % self._max_Eb_N0_dB
+            #print("e_soft = ", e_soft,np.sum(e_soft))
+            #print("e_hard = ", e_hard,np.sum(e_hard))
         except Exception as e:
-            print("OPA, pegou uma exceção!")
-            print(e)
+            None
 
-        print("CHEGOU AQUI 3")
         self.consume_each(noutput_items)
         return noutput_items

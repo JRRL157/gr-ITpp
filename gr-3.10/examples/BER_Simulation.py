@@ -76,21 +76,21 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         ##################################################
         # Variables
         ##################################################
-        self.samp_rate = samp_rate = 320000
+        self.samp_rate = samp_rate = 32000
         self.m = m = 3
 
         ##################################################
         # Blocks
         ##################################################
         self.qtgui_time_sink_x_1_0 = qtgui.time_sink_f(
-            1024, #size
+            64, #size
             samp_rate, #samp_rate
             "", #name
             2, #number of inputs
             None # parent
         )
         self.qtgui_time_sink_x_1_0.set_update_time(0.10)
-        self.qtgui_time_sink_x_1_0.set_y_axis(-1, 1)
+        self.qtgui_time_sink_x_1_0.set_y_axis(0, 3)
 
         self.qtgui_time_sink_x_1_0.set_y_label('Amplitude', "")
 
@@ -131,7 +131,7 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_1_0_win = sip.wrapinstance(self.qtgui_time_sink_x_1_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_1_0_win)
         self.qtgui_time_sink_x_0_1 = qtgui.time_sink_f(
-            1024, #size
+            64, #size
             320000, #samp_rate
             "", #name
             1, #number of inputs
@@ -179,6 +179,7 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self._qtgui_time_sink_x_0_1_win = sip.wrapinstance(self.qtgui_time_sink_x_0_1.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_1_win)
         self.blocks_vector_source_x_0 = blocks.vector_source_b((0, 0, 0,0 ), True, 1, [])
+        self.blocks_uchar_to_float_2 = blocks.uchar_to_float()
         self.blocks_uchar_to_float_1 = blocks.uchar_to_float()
         self.blocks_uchar_to_float_0_1_0 = blocks.uchar_to_float()
         self.blocks_uchar_to_float_0_1 = blocks.uchar_to_float()
@@ -188,18 +189,19 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.blocks_float_to_uchar_1 = blocks.float_to_uchar()
         self.blocks_float_to_uchar_0 = blocks.float_to_uchar()
         self.blocks_char_to_float_0 = blocks.char_to_float(1, 0.5)
+        self.blocks_add_xx_1_0 = blocks.add_vff(1)
         self.blocks_add_xx_1 = blocks.add_vff(1)
         self.blocks_add_xx_0 = blocks.add_vff(1)
         self.blocks_add_const_vxx_0 = blocks.add_const_ff(-1)
-        self.analog_random_source_x_0 = blocks.vector_source_b(list(map(int, numpy.random.randint(0, 2, 1000000))), True)
-        self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, 0.5, 0)
+        self.analog_random_source_x_0 = blocks.vector_source_b(list(map(int, numpy.random.randint(0, 2, 10000))), True)
+        self.analog_noise_source_x_0 = analog.noise_source_f(analog.GR_GAUSSIAN, 0.3, 7)
         self.analog_const_source_x_0_1_1 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 2000)
         self.analog_const_source_x_0_1_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 4)
         self.analog_const_source_x_0_1 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 7)
         self.ITpp_Hamming_Soft_Decoder_0 = ITpp.Hamming_Soft_Decoder(m)
         self.ITpp_Hamming_Encoder_0 = ITpp.Hamming_Encoder(m)
         self.ITpp_Hamming_Decoder_0 = ITpp.Hamming_Decoder(m)
-        self.ITpp_BER_Analyzer_0 = ITpp.BER_Analyzer(10)
+        self.ITpp_BER_Analyzer_0 = ITpp.BER_Analyzer(0,11.0,1.0)
         self.ID = Qt.QTabWidget()
         self.ID_widget_0 = Qt.QWidget()
         self.ID_layout_0 = Qt.QBoxLayout(Qt.QBoxLayout.TopToBottom, self.ID_widget_0)
@@ -215,17 +217,19 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.connect((self.ITpp_Hamming_Decoder_0, 0), (self.ITpp_BER_Analyzer_0, 5))
         self.connect((self.ITpp_Hamming_Decoder_0, 0), (self.blocks_uchar_to_float_0_1_0, 0))
         self.connect((self.ITpp_Hamming_Encoder_0, 0), (self.blocks_char_to_float_0, 0))
+        self.connect((self.ITpp_Hamming_Encoder_0, 0), (self.blocks_uchar_to_float_2, 0))
         self.connect((self.ITpp_Hamming_Soft_Decoder_0, 0), (self.ITpp_BER_Analyzer_0, 4))
         self.connect((self.ITpp_Hamming_Soft_Decoder_0, 0), (self.blocks_uchar_to_float_0_1, 0))
         self.connect((self.analog_const_source_x_0_1, 0), (self.ITpp_BER_Analyzer_0, 0))
         self.connect((self.analog_const_source_x_0_1_0, 0), (self.ITpp_BER_Analyzer_0, 1))
         self.connect((self.analog_const_source_x_0_1_1, 0), (self.ITpp_BER_Analyzer_0, 2))
         self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_1, 0))
+        self.connect((self.analog_noise_source_x_0, 0), (self.blocks_add_xx_1_0, 0))
         self.connect((self.analog_random_source_x_0, 0), (self.blocks_uchar_to_float_0_0, 0))
         self.connect((self.blocks_add_const_vxx_0, 0), (self.blocks_add_xx_1, 1))
         self.connect((self.blocks_add_xx_0, 0), (self.blocks_float_to_uchar_1, 0))
         self.connect((self.blocks_add_xx_1, 0), (self.ITpp_Hamming_Soft_Decoder_0, 0))
-        self.connect((self.blocks_add_xx_1, 0), (self.blocks_float_to_uchar_0, 0))
+        self.connect((self.blocks_add_xx_1_0, 0), (self.blocks_float_to_uchar_0, 0))
         self.connect((self.blocks_char_to_float_0, 0), (self.blocks_add_const_vxx_0, 0))
         self.connect((self.blocks_float_to_uchar_0, 0), (self.ITpp_Hamming_Decoder_0, 0))
         self.connect((self.blocks_float_to_uchar_1, 0), (self.ITpp_BER_Analyzer_0, 3))
@@ -237,6 +241,7 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_uchar_to_float_0_1, 0), (self.qtgui_time_sink_x_1_0, 0))
         self.connect((self.blocks_uchar_to_float_0_1_0, 0), (self.qtgui_time_sink_x_1_0, 1))
         self.connect((self.blocks_uchar_to_float_1, 0), (self.qtgui_time_sink_x_0_1, 0))
+        self.connect((self.blocks_uchar_to_float_2, 0), (self.blocks_add_xx_1_0, 1))
         self.connect((self.blocks_vector_source_x_0, 0), (self.blocks_uchar_to_float_0, 0))
 
 
