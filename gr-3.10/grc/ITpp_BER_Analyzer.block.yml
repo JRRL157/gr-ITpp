@@ -4,7 +4,7 @@ category: '[ITpp]'
 
 templates:
   imports: from gnuradio import ITpp
-  make: ITpp.BER_Analyzer(${init_Eb_N0_dB},${max_Eb_N0_dB},${step_Eb_N0_dB})
+  make: ITpp.BER_Analyzer()
 
 #  Make one 'parameters' list entry for every parameter you want settable from the GUI.
 #     Keys include:
@@ -13,16 +13,16 @@ templates:
 #     * dtype (e.g. int, float, complex, byte, short, xxx_vector, ...)
 #     * default
 
-parameters:
-- id: init_Eb_N0_dB
-  label: init_Eb_N0_dB
-  dtype: float
-- id: max_Eb_N0_dB
-  label: max_Eb_N0_dB
-  dtype: float
-- id: step_Eb_N0_dB
-  label: step_Eb_N0_dB
-  dtype: float
+#parameters:
+#- id: init_Eb_N0_dB
+#  label: init_Eb_N0_dB
+#  dtype: float
+#- id: max_Eb_N0_dB
+#  label: max_Eb_N0_dB
+#  dtype: float
+#- id: step_Eb_N0_dB
+#  label: step_Eb_N0_dB
+#  dtype: float
 
   # default: You need to fill in your grc/ITpp_Hamming_Decoder.block.yaml
 
@@ -34,30 +34,35 @@ parameters:
 #      * vlen (optional - data stream vector length. Default is 1)
 #      * optional (optional - set to 1 for optional inputs. Default is 0)
 inputs:
-- label: _N
+- label: Eb_N0_dB
   domain: stream
-  dtype: int
+  dtype: float
   optional: false
-- label: _K
-  domain: stream
-  dtype: int
-  optional: false
-- label: num_bits
-  domain: stream
-  dtype: int
-  optional: false
-- label: source
+- label: message
   domain: stream
   dtype: byte
   optional: false
 - label: decoded0
   domain: stream
   dtype: byte
-  optional: true
+  optional: false
 - label: decoded1
   domain: stream
   dtype: byte
-  optional: true
+  optional: false
+outputs:
+- label: uncoded_stats
+  domain: stream
+  dtype: float
+  optional: false
+- label: decoded0_stats
+  domain: stream
+  dtype: float
+  optional: false
+- label: decoded1_stats
+  domain: stream
+  dtype: float
+  optional: false
 #  vlen: ...
 #  vlen: ...
 
