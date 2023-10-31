@@ -12,4 +12,4 @@ Código-fonte original desenvolvido por **rafaelmcam** e encontra-se disponível
 
 Modificações feitas por:
 * Cristóvão Zuppardo Rufino - [GitHub](https://github.com/cristovaozr)
-
+* José Ribamar Ribeiro Lino - [GitHub](https://github.com/JRRL157)
