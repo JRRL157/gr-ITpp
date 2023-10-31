@@ -33,80 +33,69 @@ options:
     state: enabled
 
 blocks:
-- name: m
+- name: K
   id: variable
   parameters:
     comment: ''
-    value: '3'
+    value: '4'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [472, 20.0]
+    coordinate: [248, 4.0]
+    rotation: 0
+    state: enabled
+- name: N
+  id: variable
+  parameters:
+    comment: ''
+    value: '7'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [184, 4.0]
+    rotation: 0
+    state: enabled
+- name: m
+  id: variable
+  parameters:
+    comment: ''
+    value: N-K
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [312, 4.0]
     rotation: 0
     state: enabled
 - name: samp_rate
   id: variable
   parameters:
     comment: ''
-    value: '32000'
+    value: '3200000'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [360, 20.0]
+    coordinate: [384, 4.0]
     rotation: 0
     state: enabled
-- name: ID
-  id: qtgui_tab_widget
-  parameters:
-    alias: ''
-    comment: ''
-    gui_hint: ''
-    label0: "Compara\xE7\xE3o BER"
-    label1: Tab 1
-    label10: Tab 10
-    label11: Tab 11
-    label12: Tab 12
-    label13: Tab 13
-    label14: Tab 14
-    label15: Tab 15
-    label16: Tab 16
-    label17: Tab 17
-    label18: Tab 18
-    label19: Tab 19
-    label2: Tab 2
-    label3: Tab 3
-    label4: Tab 4
-    label5: Tab 5
-    label6: Tab 6
-    label7: Tab 7
-    label8: Tab 8
-    label9: Tab 9
-    num_tabs: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [192, 12.0]
-    rotation: 0
-    state: true
-- name: ITpp_BER_Analyzer_0
-  id: ITpp_BER_Analyzer
+- name: ITpp_BER_Analyzer_cpp_0
+  id: ITpp_BER_Analyzer_cpp
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    init_Eb_N0_dB: '0'
-    max_Eb_N0_dB: '11.0'
-    step_Eb_N0_dB: '1.0'
+    maxoutbuf: '0'
+    minoutbuf: '0'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [496, 568.0]
+    coordinate: [472, 560.0]
     rotation: 180
-    state: enabled
+    state: true
 - name: ITpp_Hamming_Decoder_0
   id: ITpp_Hamming_Decoder
   parameters:
@@ -120,7 +109,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1224, 684.0]
+    coordinate: [1312, 580.0]
     rotation: 180
     state: true
 - name: ITpp_Hamming_Encoder_0
@@ -136,7 +125,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [920, 324.0]
+    coordinate: [576, 324.0]
     rotation: 0
     state: true
 - name: ITpp_Hamming_Soft_Decoder_0
@@ -152,10 +141,40 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1336, 604.0]
+    coordinate: [1216, 380.0]
     rotation: 180
     state: enabled
-- name: analog_const_source_x_0_1
+- name: ITpp_Hard_Receiver_0
+  id: ITpp_Hard_Receiver
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1536.0, 416]
+    rotation: 270
+    state: true
+- name: ITpp_NoiseGenerator_0
+  id: ITpp_NoiseGenerator
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [896, 24.0]
+    rotation: 0
+    state: true
+- name: analog_const_source_x_0
   id: analog_const_source_x
   parameters:
     affinity: ''
@@ -169,10 +188,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [748.0, 408]
-    rotation: 270
+    coordinate: [560, 12.0]
+    rotation: 0
     state: enabled
-- name: analog_const_source_x_0_1_0
+- name: analog_const_source_x_0_0
   id: analog_const_source_x
   parameters:
     affinity: ''
@@ -186,45 +205,77 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [788.0, 408]
-    rotation: 270
+    coordinate: [560, 52.0]
+    rotation: 0
     state: enabled
-- name: analog_const_source_x_0_1_1
+- name: analog_const_source_x_0_0_0
   id: analog_const_source_x
   parameters:
     affinity: ''
     alias: ''
     comment: ''
-    const: '2000'
+    const: '1'
     maxoutbuf: '0'
     minoutbuf: '0'
-    type: int
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [828.0, 408]
-    rotation: 270
-    state: enabled
-- name: analog_noise_source_x_0
-  id: analog_noise_source_x
-  parameters:
-    affinity: ''
-    alias: ''
-    amp: '0.3'
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    noise_type: analog.GR_GAUSSIAN
-    seed: '7'
     type: float
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1360, 148.0]
+    coordinate: [560, 92.0]
     rotation: 0
     state: enabled
+- name: analog_const_source_x_0_0_0_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '20'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 132.0]
+    rotation: 0
+    state: enabled
+- name: analog_const_source_x_0_0_0_0_0
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '0.02'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [560, 172.0]
+    rotation: 0
+    state: enabled
+- name: analog_const_source_x_1
+  id: analog_const_source_x
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    const: '-1'
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    type: float
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1208, 468.0]
+    rotation: 180
+    state: true
 - name: analog_random_source_x_0
   id: analog_random_source_x
   parameters:
@@ -235,16 +286,16 @@ blocks:
     maxoutbuf: '0'
     min: '0'
     minoutbuf: '0'
-    num_samps: '10000'
+    num_samps: '10000000'
     repeat: 'True'
     type: byte
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 244.0]
+    coordinate: [128, 300.0]
     rotation: 0
-    state: true
+    state: enabled
 - name: blocks_add_const_vxx_0
   id: blocks_add_const_vxx
   parameters:
@@ -260,10 +311,10 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1376, 252.0]
+    coordinate: [1072, 324.0]
     rotation: 0
     state: true
-- name: blocks_add_xx_0
+- name: blocks_add_xx_0_1
   id: blocks_add_xx
   parameters:
     affinity: ''
@@ -278,9 +329,27 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [416, 312.0]
-    rotation: 0
-    state: true
+    coordinate: [616, 440.0]
+    rotation: 180
+    state: enabled
+- name: blocks_add_xx_0_1_0
+  id: blocks_add_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [720, 584.0]
+    rotation: 180
+    state: enabled
 - name: blocks_add_xx_1
   id: blocks_add_xx
   parameters:
@@ -296,25 +365,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1576, 168.0]
-    rotation: 0
-    state: true
-- name: blocks_add_xx_1_0
-  id: blocks_add_xx
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    num_inputs: '2'
-    type: float
-    vlen: '1'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1568, 344.0]
+    coordinate: [1392, 288.0]
     rotation: 0
     state: true
 - name: blocks_char_to_float_0
@@ -331,38 +382,95 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 292.0]
+    coordinate: [872, 324.0]
     rotation: 0
     state: true
-- name: blocks_float_to_uchar_0
-  id: blocks_float_to_uchar
+- name: blocks_int_to_float_0
+  id: blocks_int_to_float
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1504, 688.0]
+    coordinate: [280, 508.0]
     rotation: 180
     state: true
-- name: blocks_float_to_uchar_1
-  id: blocks_float_to_uchar
+- name: blocks_int_to_float_0_0
+  id: blocks_int_to_float
   parameters:
     affinity: ''
     alias: ''
     comment: ''
     maxoutbuf: '0'
     minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [528, 328.0]
-    rotation: 0
+    coordinate: [280, 572.0]
+    rotation: 180
+    state: true
+- name: blocks_int_to_float_0_0_0
+  id: blocks_int_to_float
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    scale: '1'
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [280, 628.0]
+    rotation: 180
+    state: true
+- name: blocks_multiply_xx_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [912, 384.0]
+    rotation: 180
+    state: true
+- name: blocks_multiply_xx_0_0
+  id: blocks_multiply_xx
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+    num_inputs: '2'
+    type: float
+    vlen: '1'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [920, 504.0]
+    rotation: 180
     state: true
 - name: blocks_throttle_0
   id: blocks_throttle
@@ -380,7 +488,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [704, 324.0]
+    coordinate: [344, 324.0]
     rotation: 0
     state: true
 - name: blocks_uchar_to_float_0
@@ -395,8 +503,8 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [208, 400.0]
-    rotation: 0
+    coordinate: [1056, 384.0]
+    rotation: 180
     state: true
 - name: blocks_uchar_to_float_0_0
   id: blocks_uchar_to_float
@@ -410,37 +518,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [216, 272.0]
-    rotation: 0
-    state: true
-- name: blocks_uchar_to_float_0_1
-  id: blocks_uchar_to_float
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1136, 504.0]
-    rotation: 180
-    state: true
-- name: blocks_uchar_to_float_0_1_0
-  id: blocks_uchar_to_float
-  parameters:
-    affinity: ''
-    alias: ''
-    comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-  states:
-    bus_sink: false
-    bus_source: false
-    bus_structure: null
-    coordinate: [1136, 536.0]
+    coordinate: [1088, 584.0]
     rotation: 180
     state: true
 - name: blocks_uchar_to_float_1
@@ -455,45 +533,36 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [936, 232.0]
+    coordinate: [584, 392.0]
     rotation: 0
     state: true
-- name: blocks_uchar_to_float_2
-  id: blocks_uchar_to_float
+- name: import_0
+  id: import
   parameters:
-    affinity: ''
     alias: ''
     comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
+    imports: from math import log10
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1200, 376.0]
+    coordinate: [8, 92.0]
     rotation: 0
     state: true
-- name: blocks_vector_source_x_0
-  id: blocks_vector_source_x
+- name: import_0_0
+  id: import
   parameters:
-    affinity: ''
     alias: ''
     comment: ''
-    maxoutbuf: '0'
-    minoutbuf: '0'
-    repeat: 'True'
-    tags: '[]'
-    type: byte
-    vector: (0, 0, 0,0 )
-    vlen: '1'
+    imports: import numpy as np
   states:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [32, 380.0]
+    coordinate: [104, 92.0]
     rotation: 0
     state: true
-- name: qtgui_time_sink_x_0_1
+- name: qtgui_time_sink_x_0
   id: qtgui_time_sink_x
   parameters:
     affinity: ''
@@ -510,7 +579,7 @@ blocks:
     alpha9: '1.0'
     autoscale: 'False'
     axislabels: 'True'
-    color1: green
+    color1: blue
     color10: dark blue
     color2: red
     color3: green
@@ -525,9 +594,9 @@ blocks:
     entags: 'True'
     grid: 'False'
     gui_hint: ''
-    label1: Enviado
+    label1: "Sinal de ru\xEDdo"
     label10: Signal 10
-    label2: Signal 2
+    label2: Eb/N0(dB)
     label3: Signal 3
     label4: Signal 4
     label5: Signal 5
@@ -536,7 +605,7 @@ blocks:
     label8: Signal 8
     label9: Signal 9
     legend: 'True'
-    marker1: '0'
+    marker1: '-1'
     marker10: '-1'
     marker2: '-1'
     marker3: '-1'
@@ -547,9 +616,9 @@ blocks:
     marker8: '-1'
     marker9: '-1'
     name: '""'
-    nconnections: '1'
-    size: '64'
-    srate: '320000'
+    nconnections: '2'
+    size: '1024'
+    srate: samp_rate
     stemplot: 'False'
     style1: '1'
     style10: '1'
@@ -587,7 +656,7 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [1112, 212.0]
+    coordinate: [1232, 68.0]
     rotation: 0
     state: enabled
 - name: qtgui_time_sink_x_1_0
@@ -605,7 +674,7 @@ blocks:
     alpha7: '1.0'
     alpha8: '1.0'
     alpha9: '1.0'
-    autoscale: 'False'
+    autoscale: 'True'
     axislabels: 'True'
     color1: blue
     color10: dark blue
@@ -625,7 +694,7 @@ blocks:
     label1: Soft Decoding
     label10: Signal 10
     label2: Hard Decoding
-    label3: Signal 3
+    label3: Uncoded - Theory
     label4: Signal 4
     label5: Signal 5
     label6: Signal 6
@@ -635,8 +704,8 @@ blocks:
     legend: 'True'
     marker1: '0'
     marker10: '-1'
-    marker2: '0'
-    marker3: '2'
+    marker2: '1'
+    marker3: '3'
     marker4: '-1'
     marker5: '-1'
     marker6: '-1'
@@ -644,14 +713,14 @@ blocks:
     marker8: '-1'
     marker9: '-1'
     name: '""'
-    nconnections: '2'
-    size: '64'
+    nconnections: '3'
+    size: '1024'
     srate: samp_rate
     stemplot: 'True'
     style1: '1'
     style10: '1'
     style2: '1'
-    style3: '1'
+    style3: '3'
     style4: '1'
     style5: '1'
     style6: '1'
@@ -684,40 +753,47 @@ blocks:
     bus_sink: false
     bus_source: false
     bus_structure: null
-    coordinate: [904, 500.0]
+    coordinate: [16, 544.0]
     rotation: 180
-    state: true
+    state: enabled
 
 connections:
-- [ITpp_Hamming_Decoder_0, '0', ITpp_BER_Analyzer_0, '5']
-- [ITpp_Hamming_Decoder_0, '0', blocks_uchar_to_float_0_1_0, '0']
+- [ITpp_BER_Analyzer_cpp_0, '0', blocks_int_to_float_0, '0']
+- [ITpp_BER_Analyzer_cpp_0, '1', blocks_int_to_float_0_0, '0']
+- [ITpp_BER_Analyzer_cpp_0, '2', blocks_int_to_float_0_0_0, '0']
+- [ITpp_Hamming_Decoder_0, '0', blocks_uchar_to_float_0_0, '0']
 - [ITpp_Hamming_Encoder_0, '0', blocks_char_to_float_0, '0']
-- [ITpp_Hamming_Encoder_0, '0', blocks_uchar_to_float_2, '0']
-- [ITpp_Hamming_Soft_Decoder_0, '0', ITpp_BER_Analyzer_0, '4']
-- [ITpp_Hamming_Soft_Decoder_0, '0', blocks_uchar_to_float_0_1, '0']
-- [analog_const_source_x_0_1, '0', ITpp_BER_Analyzer_0, '0']
-- [analog_const_source_x_0_1_0, '0', ITpp_BER_Analyzer_0, '1']
-- [analog_const_source_x_0_1_1, '0', ITpp_BER_Analyzer_0, '2']
-- [analog_noise_source_x_0, '0', blocks_add_xx_1, '0']
-- [analog_noise_source_x_0, '0', blocks_add_xx_1_0, '0']
-- [analog_random_source_x_0, '0', blocks_uchar_to_float_0_0, '0']
+- [ITpp_Hamming_Soft_Decoder_0, '0', blocks_uchar_to_float_0, '0']
+- [ITpp_Hard_Receiver_0, '0', ITpp_Hamming_Decoder_0, '0']
+- [ITpp_NoiseGenerator_0, '0', blocks_add_xx_1, '0']
+- [ITpp_NoiseGenerator_0, '0', qtgui_time_sink_x_0, '0']
+- [ITpp_NoiseGenerator_0, '1', ITpp_BER_Analyzer_cpp_0, '0']
+- [ITpp_NoiseGenerator_0, '1', qtgui_time_sink_x_0, '1']
+- [analog_const_source_x_0, '0', ITpp_NoiseGenerator_0, '0']
+- [analog_const_source_x_0_0, '0', ITpp_NoiseGenerator_0, '1']
+- [analog_const_source_x_0_0_0, '0', ITpp_NoiseGenerator_0, '2']
+- [analog_const_source_x_0_0_0_0, '0', ITpp_NoiseGenerator_0, '3']
+- [analog_const_source_x_0_0_0_0_0, '0', ITpp_NoiseGenerator_0, '4']
+- [analog_const_source_x_1, '0', blocks_multiply_xx_0, '1']
+- [analog_const_source_x_1, '0', blocks_multiply_xx_0_0, '0']
+- [analog_random_source_x_0, '0', blocks_throttle_0, '0']
 - [blocks_add_const_vxx_0, '0', blocks_add_xx_1, '1']
-- [blocks_add_xx_0, '0', blocks_float_to_uchar_1, '0']
+- [blocks_add_xx_0_1, '0', ITpp_BER_Analyzer_cpp_0, '1']
+- [blocks_add_xx_0_1_0, '0', ITpp_BER_Analyzer_cpp_0, '2']
 - [blocks_add_xx_1, '0', ITpp_Hamming_Soft_Decoder_0, '0']
-- [blocks_add_xx_1_0, '0', blocks_float_to_uchar_0, '0']
+- [blocks_add_xx_1, '0', ITpp_Hard_Receiver_0, '0']
 - [blocks_char_to_float_0, '0', blocks_add_const_vxx_0, '0']
-- [blocks_float_to_uchar_0, '0', ITpp_Hamming_Decoder_0, '0']
-- [blocks_float_to_uchar_1, '0', ITpp_BER_Analyzer_0, '3']
-- [blocks_float_to_uchar_1, '0', blocks_throttle_0, '0']
+- [blocks_int_to_float_0, '0', qtgui_time_sink_x_1_0, '0']
+- [blocks_int_to_float_0_0, '0', qtgui_time_sink_x_1_0, '1']
+- [blocks_int_to_float_0_0_0, '0', qtgui_time_sink_x_1_0, '2']
+- [blocks_multiply_xx_0, '0', blocks_add_xx_0_1, '1']
+- [blocks_multiply_xx_0_0, '0', blocks_add_xx_0_1_0, '1']
 - [blocks_throttle_0, '0', ITpp_Hamming_Encoder_0, '0']
 - [blocks_throttle_0, '0', blocks_uchar_to_float_1, '0']
-- [blocks_uchar_to_float_0, '0', blocks_add_xx_0, '1']
-- [blocks_uchar_to_float_0_0, '0', blocks_add_xx_0, '0']
-- [blocks_uchar_to_float_0_1, '0', qtgui_time_sink_x_1_0, '0']
-- [blocks_uchar_to_float_0_1_0, '0', qtgui_time_sink_x_1_0, '1']
-- [blocks_uchar_to_float_1, '0', qtgui_time_sink_x_0_1, '0']
-- [blocks_uchar_to_float_2, '0', blocks_add_xx_1_0, '1']
-- [blocks_vector_source_x_0, '0', blocks_uchar_to_float_0, '0']
+- [blocks_uchar_to_float_0, '0', blocks_multiply_xx_0, '0']
+- [blocks_uchar_to_float_0_0, '0', blocks_multiply_xx_0_0, '1']
+- [blocks_uchar_to_float_1, '0', blocks_add_xx_0_1, '0']
+- [blocks_uchar_to_float_1, '0', blocks_add_xx_0_1_0, '0']
 
 metadata:
   file_format: 1
