@@ -15,6 +15,7 @@ install(FILES
     ITpp_RS_Decoder.block.yml
     ITpp_RS_Encoder.block.yml
     ITpp_BSC_Byte.block.yml
-    ITpp_BER_Analyzer.block.yml
-    ITpp_counter.block.yml DESTINATION share/gnuradio/grc/blocks
+    ITpp_BER_Analyzer_cpp.block.yml
+    ITpp_Hard_Receiver.block.yml
+    ITpp_NoiseGenerator.block.yml DESTINATION share/gnuradio/grc/blocks
 )

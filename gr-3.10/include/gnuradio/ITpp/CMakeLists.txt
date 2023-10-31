@@ -18,5 +18,6 @@ install(FILES
     Hamming_Encoder.h
     RS_Decoder.h
     RS_Encoder.h
-    BSC_Byte.h DESTINATION include/gnuradio/ITpp
+    BSC_Byte.h
+    BER_Analyzer_cpp.h DESTINATION include/gnuradio/ITpp
 )

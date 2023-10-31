@@ -21,5 +21,8 @@ except ModuleNotFoundError:
 
 # import any pure python here
 from .BER_Analyzer import BER_Analyzer
-from .vector_source_adder import vector_source_adder
+from .counter import counter
+from .BER_Analyzer2 import BER_Analyzer2
+from .Hard_Receiver import Hard_Receiver
+from .NoiseGenerator import NoiseGenerator
 #
