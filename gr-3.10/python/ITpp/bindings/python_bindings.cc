@@ -29,6 +29,7 @@ namespace py = pybind11;
     void bind_RS_Decoder(py::module& m);
     void bind_RS_Encoder(py::module& m);
     void bind_BSC_Byte(py::module& m);
+    void bind_BER_Analyzer_cpp(py::module& m);
 // ) END BINDING_FUNCTION_PROTOTYPES
 
 
@@ -65,5 +66,6 @@ PYBIND11_MODULE(ITpp_python, m)
     bind_RS_Decoder(m);
     bind_RS_Encoder(m);
     bind_BSC_Byte(m);
+    bind_BER_Analyzer_cpp(m);
     // ) END BINDING_FUNCTION_CALLS
 }
