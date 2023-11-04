@@ -90,10 +90,11 @@ namespace gr {
       for (const auto& pair : records) {
           float Eb_N0_db = pair.first;
           int value[3] = {pair.second[0],pair.second[1],pair.second[2]};
-          double error1 = 1000000*((1.0*value[1])/(1.0*value[0]));
-          double error2 = 1000000*((1.0*value[2])/(1.0*value[0]));
-          double theoreticalError = 1000000*(0.5*std::erfc(std::sqrt(std::pow(10.0,Eb_N0_db/10.0))));
-          printf("Eb_N0 = %.2f\t#Samples = %d\t\tTheoreticalError = %d\t\tError1(1e-6) = %d\t\tError2(1e-6) = %d\n",Eb_N0_db,value[0],(int)theoreticalError,(int)error1,(int)error2);
+          int numSamples = value[0];
+          int numError1 = value[1];
+          int numError2 = value[2];
+          double theoreticalError = (0.5*std::erfc(std::sqrt(std::pow(10.0,Eb_N0_db/10.0))));
+          //printf("Eb_N0 = %.2f\t#Samples = %d\t\tTheoreticalError = %f\t\tError1 = %d/%d\t\tError2 = %d/%d\n",Eb_N0_db,numSamples,theoreticalError,numError1,numSamples,numError2,numSamples);
       }
 
       //Gather all the information to plot the graph through GNURadio
@@ -102,16 +103,25 @@ namespace gr {
 
       for(int i = 0;i<noutput_items;i++){
         const auto& pair = *records_it;
-        
-        float Eb_N0_db = pair.first;
         int value[3] = {pair.second[0],pair.second[1],pair.second[2]};
-        double error1 = 1000000*((1.0*value[1])/(1.0*value[0]));
-        double error2 = 1000000*((1.0*value[2])/(1.0*value[0]));                    
-        double theoreticalError = 1000000*(0.5*std::erfc(std::sqrt(std::pow(10.0,(Eb_N0_db/10.0)))));
 
-        out0[i] = error1;
-        out1[i] = error2;
-        out2[i] = theoreticalError;
+        float Eb_N0_db = pair.first;
+        int numSamples = value[0];
+        double numError1 = value[1] == 0 ? 1 : value[1];
+        double numError2 = value[2] == 0 ? 1 : value[2];
+        double error1 = (numError1/numSamples);
+        int error1e6 = 1000000*error1;
+        double log10error1 = log10(error1);
+        double error2 = (numError2/numSamples);
+        int error2e6 = 1000000*error2;
+        double log10error2 = log10(error2);
+        double theoreticalError = (0.5*std::erfc(std::sqrt(std::pow(10.0,Eb_N0_db/10.0))));
+        int theoreticalError1e6 = 1000000*theoreticalError;
+        double log10theory = log10(theoreticalError);
+        
+        out0[i] = 1000*log10error1;
+        out1[i] = 1000*log10error2;
+        out2[i] = 1000*log10theory;
         ++records_it;
 
         if(records_it == records.end())

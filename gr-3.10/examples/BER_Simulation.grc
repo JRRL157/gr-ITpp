@@ -231,7 +231,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    const: '20'
+    const: '7'
     maxoutbuf: '0'
     minoutbuf: '0'
     type: float
@@ -248,7 +248,7 @@ blocks:
     affinity: ''
     alias: ''
     comment: ''
-    const: '0.02'
+    const: '0.01'
     maxoutbuf: '0'
     minoutbuf: '0'
     type: float
@@ -705,7 +705,7 @@ blocks:
     marker1: '0'
     marker10: '-1'
     marker2: '1'
-    marker3: '3'
+    marker3: '0'
     marker4: '-1'
     marker5: '-1'
     marker6: '-1'
@@ -717,9 +717,9 @@ blocks:
     size: '1024'
     srate: samp_rate
     stemplot: 'True'
-    style1: '1'
+    style1: '3'
     style10: '1'
-    style2: '1'
+    style2: '3'
     style3: '3'
     style4: '1'
     style5: '1'

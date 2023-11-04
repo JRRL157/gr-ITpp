@@ -115,9 +115,9 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
             'magenta', 'yellow', 'dark red', 'dark green', 'dark blue']
         alphas = [1.0, 1.0, 1.0, 1.0, 1.0,
             1.0, 1.0, 1.0, 1.0, 1.0]
-        styles = [1, 1, 3, 1, 1,
+        styles = [3, 3, 3, 1, 1,
             1, 1, 1, 1, 1]
-        markers = [0, 1, 3, -1, -1,
+        markers = [0, 1, 0, -1, -1,
             -1, -1, -1, -1, -1]
 
 
@@ -198,8 +198,8 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.blocks_add_const_vxx_0 = blocks.add_const_ff(-1)
         self.analog_random_source_x_0 = blocks.vector_source_b(list(map(int, numpy.random.randint(0, 2, 10000000))), True)
         self.analog_const_source_x_1 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, -1)
-        self.analog_const_source_x_0_0_0_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 0.02)
-        self.analog_const_source_x_0_0_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 20)
+        self.analog_const_source_x_0_0_0_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 0.01)
+        self.analog_const_source_x_0_0_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 7)
         self.analog_const_source_x_0_0_0 = analog.sig_source_f(0, analog.GR_CONST_WAVE, 0, 0, 1)
         self.analog_const_source_x_0_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 4)
         self.analog_const_source_x_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 7)
