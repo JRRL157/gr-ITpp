@@ -43,7 +43,7 @@ import numpy as np
 
 from gnuradio import qtgui
 
-class BER_Simulation_X(gr.top_block, Qt.QWidget):
+class BER_Simulation_XI(gr.top_block, Qt.QWidget):
 
     def __init__(self):
         gr.top_block.__init__(self, "Not titled yet", catch_exceptions=True)
@@ -66,7 +66,7 @@ class BER_Simulation_X(gr.top_block, Qt.QWidget):
         self.top_grid_layout = Qt.QGridLayout()
         self.top_layout.addLayout(self.top_grid_layout)
 
-        self.settings = Qt.QSettings("GNU Radio", "BER_Simulation_X")
+        self.settings = Qt.QSettings("GNU Radio", "BER_Simulation_XI")
 
         try:
             if StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
@@ -341,26 +341,26 @@ class BER_Simulation_X(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_char_to_float_0_1, 0), (self.qtgui_time_sink_x_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.ITpp_Hamming_Encoder_0, 0))
         self.connect((self.blocks_throttle_0, 0), (self.blocks_char_to_float_0_1, 0))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 10))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 14))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 8))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 4))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 20))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 32))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 30))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 38))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 28))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 34))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 24))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 6))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 36))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 16))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 18))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 26))
-        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 12))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 22))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 36))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 28))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 18))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 2))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 38))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 4))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 14))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 24))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 20))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 30))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 16))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 34))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 26))
         self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 0))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 32))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 12))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 10))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 8))
+        self.connect((self.blocks_throttle_0, 0), (self.qtgui_bercurve_sink_0, 6))
         self.connect((self.digital_binary_slicer_fb_0, 0), (self.ITpp_Hamming_Decoder_0, 0))
         self.connect((self.digital_binary_slicer_fb_0_0, 0), (self.ITpp_Hamming_Decoder_0_0, 0))
         self.connect((self.digital_binary_slicer_fb_0_0_0, 0), (self.ITpp_Hamming_Decoder_0_0_0, 0))
@@ -374,7 +374,7 @@ class BER_Simulation_X(gr.top_block, Qt.QWidget):
 
 
     def closeEvent(self, event):
-        self.settings = Qt.QSettings("GNU Radio", "BER_Simulation_X")
+        self.settings = Qt.QSettings("GNU Radio", "BER_Simulation_XI")
         self.settings.setValue("geometry", self.saveGeometry())
         self.stop()
         self.wait()
@@ -457,7 +457,7 @@ class BER_Simulation_X(gr.top_block, Qt.QWidget):
 
 
 
-def main(top_block_cls=BER_Simulation_X, options=None):
+def main(top_block_cls=BER_Simulation_XI, options=None):
 
     if StrictVersion("4.5.0") <= StrictVersion(Qt.qVersion()) < StrictVersion("5.0.0"):
         style = gr.prefs().get_string('qtgui', 'style', 'raster')
