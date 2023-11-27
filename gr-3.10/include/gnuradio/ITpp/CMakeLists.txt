@@ -19,5 +19,6 @@ install(FILES
     RS_Decoder.h
     RS_Encoder.h
     BSC_Byte.h
-    BER_Analyzer_cpp.h DESTINATION include/gnuradio/ITpp
+    BER_Analyzer_cpp.h
+    Decoder_BPSK.h DESTINATION include/gnuradio/ITpp
 )

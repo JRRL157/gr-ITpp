@@ -37,7 +37,8 @@ list(APPEND ITpp_python_files
     RS_Decoder_python.cc
     RS_Encoder_python.cc
     BSC_Byte_python.cc
-    BER_Analyzer_cpp_python.cc python_bindings.cc)
+    BER_Analyzer_cpp_python.cc
+    Decoder_BPSK_python.cc python_bindings.cc)
 
 GR_PYBIND_MAKE_OOT(ITpp
    ../../..

@@ -21,6 +21,7 @@ list(APPEND ITpp_sources
     RS_Encoder_impl.cc
     BSC_Byte_impl.cc
     BER_Analyzer_cpp_impl.cc
+    Decoder_BPSK_impl.cc
 )
 
 set(ITpp_sources "${ITpp_sources}" PARENT_SCOPE)

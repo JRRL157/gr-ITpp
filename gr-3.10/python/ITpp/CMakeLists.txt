@@ -23,7 +23,8 @@ GR_PYTHON_INSTALL(
     FILES
     __init__.py
     Hard_Receiver.py
-    NoiseGenerator.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/ITpp
+    NoiseGenerator.py
+    Uncoded_BPKS.py DESTINATION ${GR_PYTHON_DIR}/gnuradio/ITpp
 )
 
 ########################################################################
