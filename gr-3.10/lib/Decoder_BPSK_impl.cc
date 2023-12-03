@@ -75,11 +75,10 @@ namespace gr {
           for(int j = 0; j < d_N; j++){
             encoded(j) = in[d_N*i+j];
           }
-          for(int j = 0;j < d_K;j++){
+          
+          for(int j = d_K+1;j < d_N;j++){
             decoded(j) = (int)encoded.get(j);
           }
-
-          decoded = block.decode(encoded);
 
           for(int j = 0; j < d_K; j++){
             out[d_K*i+j] = (int)decoded.get(j);

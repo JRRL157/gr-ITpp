@@ -158,7 +158,7 @@ blocks:
     bus_structure: null
     coordinate: [1536.0, 416]
     rotation: 270
-    state: true
+    state: disabled
 - name: ITpp_NoiseGenerator_0
   id: ITpp_NoiseGenerator
   parameters:
@@ -536,6 +536,21 @@ blocks:
     coordinate: [584, 392.0]
     rotation: 0
     state: true
+- name: digital_binary_slicer_fb_0
+  id: digital_binary_slicer_fb
+  parameters:
+    affinity: ''
+    alias: ''
+    comment: ''
+    maxoutbuf: '0'
+    minoutbuf: '0'
+  states:
+    bus_sink: false
+    bus_source: false
+    bus_structure: null
+    coordinate: [1600.0, 416]
+    rotation: 270
+    state: true
 - name: import_0
   id: import
   parameters:
@@ -782,6 +797,7 @@ connections:
 - [blocks_add_xx_0_1_0, '0', ITpp_BER_Analyzer_cpp_0, '2']
 - [blocks_add_xx_1, '0', ITpp_Hamming_Soft_Decoder_0, '0']
 - [blocks_add_xx_1, '0', ITpp_Hard_Receiver_0, '0']
+- [blocks_add_xx_1, '0', digital_binary_slicer_fb_0, '0']
 - [blocks_char_to_float_0, '0', blocks_add_const_vxx_0, '0']
 - [blocks_int_to_float_0, '0', qtgui_time_sink_x_1_0, '0']
 - [blocks_int_to_float_0_0, '0', qtgui_time_sink_x_1_0, '1']
@@ -794,6 +810,7 @@ connections:
 - [blocks_uchar_to_float_0_0, '0', blocks_multiply_xx_0_0, '1']
 - [blocks_uchar_to_float_1, '0', blocks_add_xx_0_1, '0']
 - [blocks_uchar_to_float_1, '0', blocks_add_xx_0_1_0, '0']
+- [digital_binary_slicer_fb_0, '0', ITpp_Hamming_Decoder_0, '0']
 
 metadata:
   file_format: 1

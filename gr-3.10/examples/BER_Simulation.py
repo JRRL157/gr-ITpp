@@ -28,6 +28,7 @@ from gnuradio import ITpp
 from gnuradio import analog
 from gnuradio import blocks
 import numpy
+from gnuradio import digital
 from gnuradio import gr
 from gnuradio.fft import window
 import sys
@@ -182,6 +183,7 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
 
         self._qtgui_time_sink_x_0_win = sip.wrapinstance(self.qtgui_time_sink_x_0.qwidget(), Qt.QWidget)
         self.top_layout.addWidget(self._qtgui_time_sink_x_0_win)
+        self.digital_binary_slicer_fb_0 = digital.binary_slicer_fb()
         self.blocks_uchar_to_float_1 = blocks.uchar_to_float()
         self.blocks_uchar_to_float_0_0 = blocks.uchar_to_float()
         self.blocks_uchar_to_float_0 = blocks.uchar_to_float()
@@ -204,7 +206,6 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.analog_const_source_x_0_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 4)
         self.analog_const_source_x_0 = analog.sig_source_i(0, analog.GR_CONST_WAVE, 0, 0, 7)
         self.ITpp_NoiseGenerator_0 = ITpp.NoiseGenerator()
-        self.ITpp_Hard_Receiver_0 = ITpp.Hard_Receiver()
         self.ITpp_Hamming_Soft_Decoder_0 = ITpp.Hamming_Soft_Decoder(m)
         self.ITpp_Hamming_Encoder_0 = ITpp.Hamming_Encoder(m)
         self.ITpp_Hamming_Decoder_0 = ITpp.Hamming_Decoder(m)
@@ -220,11 +221,10 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.connect((self.ITpp_Hamming_Decoder_0, 0), (self.blocks_uchar_to_float_0_0, 0))
         self.connect((self.ITpp_Hamming_Encoder_0, 0), (self.blocks_char_to_float_0, 0))
         self.connect((self.ITpp_Hamming_Soft_Decoder_0, 0), (self.blocks_uchar_to_float_0, 0))
-        self.connect((self.ITpp_Hard_Receiver_0, 0), (self.ITpp_Hamming_Decoder_0, 0))
         self.connect((self.ITpp_NoiseGenerator_0, 1), (self.ITpp_BER_Analyzer_cpp_0, 0))
         self.connect((self.ITpp_NoiseGenerator_0, 0), (self.blocks_add_xx_1, 0))
-        self.connect((self.ITpp_NoiseGenerator_0, 1), (self.qtgui_time_sink_x_0, 1))
         self.connect((self.ITpp_NoiseGenerator_0, 0), (self.qtgui_time_sink_x_0, 0))
+        self.connect((self.ITpp_NoiseGenerator_0, 1), (self.qtgui_time_sink_x_0, 1))
         self.connect((self.analog_const_source_x_0, 0), (self.ITpp_NoiseGenerator_0, 0))
         self.connect((self.analog_const_source_x_0_0, 0), (self.ITpp_NoiseGenerator_0, 1))
         self.connect((self.analog_const_source_x_0_0_0, 0), (self.ITpp_NoiseGenerator_0, 2))
@@ -237,7 +237,7 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_add_xx_0_1, 0), (self.ITpp_BER_Analyzer_cpp_0, 1))
         self.connect((self.blocks_add_xx_0_1_0, 0), (self.ITpp_BER_Analyzer_cpp_0, 2))
         self.connect((self.blocks_add_xx_1, 0), (self.ITpp_Hamming_Soft_Decoder_0, 0))
-        self.connect((self.blocks_add_xx_1, 0), (self.ITpp_Hard_Receiver_0, 0))
+        self.connect((self.blocks_add_xx_1, 0), (self.digital_binary_slicer_fb_0, 0))
         self.connect((self.blocks_char_to_float_0, 0), (self.blocks_add_const_vxx_0, 0))
         self.connect((self.blocks_int_to_float_0, 0), (self.qtgui_time_sink_x_1_0, 0))
         self.connect((self.blocks_int_to_float_0_0, 0), (self.qtgui_time_sink_x_1_0, 1))
@@ -250,6 +250,7 @@ class BER_Simulation(gr.top_block, Qt.QWidget):
         self.connect((self.blocks_uchar_to_float_0_0, 0), (self.blocks_multiply_xx_0_0, 1))
         self.connect((self.blocks_uchar_to_float_1, 0), (self.blocks_add_xx_0_1, 0))
         self.connect((self.blocks_uchar_to_float_1, 0), (self.blocks_add_xx_0_1_0, 0))
+        self.connect((self.digital_binary_slicer_fb_0, 0), (self.ITpp_Hamming_Decoder_0, 0))
 
 
     def closeEvent(self, event):
